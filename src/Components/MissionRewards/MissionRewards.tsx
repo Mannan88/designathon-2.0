@@ -13,26 +13,36 @@ gsap.registerPlugin(ScrollTrigger)
 
 const MissionRewards = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
-
+  const paddingRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement[]>([])
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Main section scroll animation (expands the container)
-      gsap.to(sectionRef.current, {
+      // 1. Expansion Animation: Margin/Padding removal
+      // We animate the padding of the inner container to 0
+      const expandConfig = {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 85%",
           end: "top top",
           scrub: true,
         },
-        margin: 0,
-        borderRadius: 0,
         duration: 1,
         ease: "power2.out"
+      }
+
+      gsap.to(paddingRef.current, {
+        ...expandConfig,
+        padding: 0,
       })
 
-      // Cards sequence animation (Pinned)
+      gsap.to(contentRef.current, {
+        ...expandConfig,
+        borderRadius: 0,
+      })
+
+      // 2. Cards sequence animation (Pinned)
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -68,7 +78,8 @@ const MissionRewards = () => {
       assetColors: "#F5F5F5",
       position: "2",
       follower: "nd",
-      textColor: "#F27C06"
+      textColor: "#F27C06",
+      className: "order-2 md:order-none"
     },
     {
       imageSrc: FirstPrize,
@@ -78,7 +89,8 @@ const MissionRewards = () => {
       assetColors: "#211E1B",
       position: "1",
       follower: "st",
-      textColor: "#F5F5F5"
+      textColor: "#F5F5F5",
+      className: "order-1 md:order-none"
     },
     {
       imageSrc: ThirdPrize,
@@ -88,47 +100,52 @@ const MissionRewards = () => {
       assetColors: "#F27C06",
       position: "3",
       follower: "rd",
-      textColor: "#211E1B"
+      textColor: "#211E1B",
+      className: "order-3 md:order-none"
     }
   ]
 
   return (
-    <div ref={sectionRef} className="relative bg-[#000000]  rounded-4xl min-h-screen overflow-hidden">
-      <GalaxyModel />
-      <div className="relative flex flex-col items-center justify-center pointer-events-none z-10 py-12 min-h-screen">
-        <div className="flex flex-wrap text-5xl md:text-8xl gap-4 md:gap-10 justify-center w-full items-center px-4">
-          <div className="hidden xl:block"><LeftBar width="300" /></div>
-          <h1 className="text-center">MISSION <span className="text-accent">REWARDS</span></h1>
-          <div className="hidden xl:block"><RightBar width="300" /></div>
-        </div>
-        <div className="cards-container pointer-events-none flex w-full justify-center md:justify-evenly items-center flex-wrap gap-10 px-4">
-          {prizes.map((prize, index) => (
-            <div
-              key={index}
-              className="pointer-events-auto"
-              ref={(el) => { if (el) cardsRef.current[index] = el }}
-            >
-              <TiltedCard
-                imageSrc={prize.imageSrc}
-                altText={prize.altText}
-                containerHeight="500px"
-                containerWidth="300px"
-                imageHeight="500px"
-                imageWidth="300px"
-                bgcolor={prize.bgcolor}
-                rotateAmplitude={12}
-                scaleOnHover={1.05}
-                showMobileWarning={false}
-                showTooltip
-                displayOverlayContent
-                overlayContent={prize.overlayContent}
-                assetColors={prize.assetColors}
-                position={prize.position}
-                follower={prize.follower}
-                textColor={prize.textColor}
-              />
+    <div ref={sectionRef} className="relative w-full min-h-screen overflow-hidden">
+      <div ref={paddingRef} className="w-full h-full p-4 md:p-8">
+        <div ref={contentRef} className="relative w-full h-full bg-[#000000] rounded-4xl overflow-hidden">
+          <GalaxyModel />
+          <div className="relative flex flex-col items-center justify-center pointer-events-none z-10 py-12 min-h-screen">
+            <div className="flex flex-wrap text-5xl md:text-8xl gap-4 md:gap-10 justify-center w-full items-center px-4">
+              <div className="hidden xl:block"><LeftBar width="300" /></div>
+              <h1 className="text-center">MISSION <span className="text-accent">REWARDS</span></h1>
+              <div className="hidden xl:block"><RightBar width="300" /></div>
             </div>
-          ))}
+            <div className="cards-container pointer-events-none flex w-full justify-center md:justify-evenly items-center flex-wrap gap-10 px-4">
+              {prizes.map((prize, index) => (
+                <div
+                  key={index}
+                  className={`pointer-events-auto ${prize.className}`}
+                  ref={(el) => { if (el) cardsRef.current[index] = el }}
+                >
+                  <TiltedCard
+                    imageSrc={prize.imageSrc}
+                    altText={prize.altText}
+                    containerHeight="500px"
+                    containerWidth="300px"
+                    imageHeight="500px"
+                    imageWidth="300px"
+                    bgcolor={prize.bgcolor}
+                    rotateAmplitude={12}
+                    scaleOnHover={1.05}
+                    showMobileWarning={false}
+                    showTooltip
+                    displayOverlayContent
+                    overlayContent={prize.overlayContent}
+                    assetColors={prize.assetColors}
+                    position={prize.position}
+                    follower={prize.follower}
+                    textColor={prize.textColor}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
