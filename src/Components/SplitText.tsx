@@ -6,6 +6,22 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
+interface SplitTextProps {
+  text: string;
+  className?: string;
+  delay?: number;
+  duration?: number;
+  ease?: string;
+  splitType?: 'chars' | 'words' | 'lines';
+  from?: Record<string, any>;
+  to?: Record<string, any>;
+  threshold?: number;
+  rootMargin?: string;
+  textAlign?: 'left' | 'right' | 'center' | 'justify' | 'start' | 'end';
+  tag?: string;
+  onLetterAnimationComplete?: () => void;
+}
+
 const SplitText = ({
   text,
   className = '',
@@ -20,8 +36,8 @@ const SplitText = ({
   textAlign = 'center',
   tag = 'p',
   onLetterAnimationComplete
-}) => {
-  const ref = useRef(null);
+}: SplitTextProps) => {
+  const ref = useRef<any>(null); // Using any to handle _rbsplitInstance
   const animationCompletedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -69,8 +85,8 @@ const SplitText = ({
             : `+=${marginValue}${marginUnit}`;
       const start = `top ${startPct}%${sign}`;
 
-      let targets;
-      const assignTargets = self => {
+      let targets: any;
+      const assignTargets = (self: any) => {
         if (splitType.includes('chars') && self.chars.length) targets = self.chars;
         if (!targets && splitType.includes('words') && self.words.length) targets = self.words;
         if (!targets && splitType.includes('lines') && self.lines.length) targets = self.lines;
@@ -85,7 +101,7 @@ const SplitText = ({
         wordsClass: 'split-word',
         charsClass: 'split-char',
         reduceWhiteSpace: false,
-        onSplit: self => {
+        onSplit: (self: any) => {
           assignTargets(self);
           const tween = gsap.fromTo(
             targets,
@@ -146,8 +162,8 @@ const SplitText = ({
   );
 
   const renderTag = () => {
-    const style = {
-      textAlign,
+    const style: React.CSSProperties = {
+      textAlign: textAlign as any, // Cast to any or precise type if needed, React.CSSProperties uses standard values
       overflow: 'hidden',
       display: 'inline-block',
       whiteSpace: 'normal',
@@ -155,7 +171,7 @@ const SplitText = ({
       willChange: 'transform, opacity'
     };
     const classes = `split-parent ${className}`;
-    const Tag = tag || 'p';
+    const Tag = (tag || 'p') as any; // Cast tag to any to allow dynamic component usage without complex types
 
     return (
       <Tag ref={ref} style={style} className={classes}>

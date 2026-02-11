@@ -2,58 +2,12 @@ import { useState, useRef, useEffect, memo } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 
-interface SocialItem {
-  title: string;
-  src: string;
-  color: string;
-  href: string;
-}
-
-const scaleAnimation = {
-  initial: { scale: 0, x: "-50%", y: "-50%" },
-  enter: {
-    scale: 1,
-    x: "-50%",
-    y: "-50%",
-    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
-  },
-  closed: {
-    scale: 0,
-    x: "-50%",
-    y: "-50%",
-    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
-  },
-};
-
 const Footer = memo(function Footer() {
-  const [modal, setModal] = useState({ active: false, index: 0 });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const modalContainer = useRef<HTMLDivElement>(null);
+  // const [modal, setModal] = useState({ active: false, index: 0 }); // Unused
+  // const [hoveredIndex, setHoveredIndex] = useState<number | null>(null); // Unused
+  // const modalContainer = useRef<HTMLDivElement>(null); // Used only for the motion div below
 
-  useEffect(() => {
-    if (!modalContainer.current) return;
-
-    const xMoveContainer = gsap.quickTo(modalContainer.current, "left", {
-      duration: 0.8,
-      ease: "power3",
-    });
-    const yMoveContainer = gsap.quickTo(modalContainer.current, "top", {
-      duration: 0.8,
-      ease: "power3",
-    });
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      xMoveContainer(clientX);
-      yMoveContainer(clientY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+  // useEffect for modalContainer removed as likely unused if we remove the motion.div
 
   return (
     <footer className="bg-background relative z-0 w-full overflow-hidden">
@@ -145,13 +99,8 @@ const Footer = memo(function Footer() {
       </div>
 
       {/* hover card for socials - follows mouse */}
-      <motion.div
-        ref={modalContainer}
-        variants={scaleAnimation}
-        initial="initial"
-        animate={modal.active ? "enter" : "closed"}
-        className="pointer-events-none fixed z-50 flex h-48 w-72 items-center justify-center overflow-hidden rounded-2xl shadow-2xl"
-      ></motion.div>
+      </div>
+    </footer>
     </footer>
   );
 });
