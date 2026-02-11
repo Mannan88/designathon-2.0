@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { motion, type HTMLMotionProps } from "motion/react";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
 const styles = {
   wrapper: {

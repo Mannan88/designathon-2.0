@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect, memo } from "react";
-import { motion } from "framer-motion";
-import gsap from "gsap";
+import { memo } from "react";
+
 
 const Footer = memo(function Footer() {
   // const [modal, setModal] = useState({ active: false, index: 0 }); // Unused
@@ -98,9 +97,6 @@ const Footer = memo(function Footer() {
         </div>
       </div>
 
-      {/* hover card for socials - follows mouse */}
-      </div>
-    </footer>
     </footer>
   );
 });
