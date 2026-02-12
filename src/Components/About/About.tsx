@@ -14,64 +14,56 @@ const About = () => {
   const container = useRef(null)
 
   useGSAP(() => {
+
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
-        start: "top 60%",
-        end: "bottom 40%",
+        start: "top 80%",
+        end: "bottom 90%",
         toggleActions: "play none none reverse",
-        markers: false
+        scrub: true
       },
       defaults: { ease: "power3.out" }
     })
 
     tl.from(".animate-text", {
-      x: -800,
-      opacity: 0,
+      xPercent: -800,
+      autoAlpha: 0,
       stagger: 0.1,
       duration: 2,
-      delay:0.8,
-      ease: "elastic.out(1, 0.6)",
-      yoyo: true
+      ease: "elastic.out(1,0.5)",
     })
       .from(".image-animation", {
-        x: 800,
+        xPercent: 800,
         pin:true,
-        opacity: 0,
-        duration: 1,
-        ease: "elastic.out(1, 0.6)",
-        yoyo: true
+        autoAlpha: 0,
+        duration: 0.5,
+        ease: "elastic.out(1,0.5)",
       },"<").from(".copyright-animation",{
-        y: -80,
-        opacity: 0,
-        duration: 1,
+        yPercent: -80,
+        autoAlpha: 0,
+        duration: 0.1,
         ease: "elastic",
-        yoyo: true,
-        stagger:0.2
       })
       .from(".button-animation", {
-        x: 200,
-        opacity: 0,
-        stagger: 0.1,
+        xPercent: 200,
+        autoAlpha: 0,
         duration: 0.6,
         ease: "power1.inOut",
-        yoyo: true
-      },"<0.5")
+      },"<")
       .from(".arrow", {
-        x: -150,
-        opacity: 0,
+        xPercent: -150,
+        autoAlpha: 0,
         duration: 1,
         ease: "bounce.out",
-        yoyo: true
       })
       .from(".icons-animation", {
-        y: -80,
-        x:-40,
-        pin: true,
-        opacity: 0,
+        yPercent: -80,
+        xPercent:-40,
+        autoAlpha: 0,
         duration: 1,
         ease: "elastic",
-        yoyo: true,
         stagger:0.2
       })
 
