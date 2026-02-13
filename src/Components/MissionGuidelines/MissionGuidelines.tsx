@@ -3,7 +3,7 @@ import OranageBox from "./Components/OranageBox";
 
 const MissionGuidelines = () => {
   return (
-    <section className="min-h-screen w-full bg-background border-t border-white/10 relative overflow-hidden">
+    <section className="w-full bg-background border-t border-white/10 relative overflow-hidden lg:h-screen">
       {/* Orange corner decorations */}
       <OranageBox/>
       {/* Main Grid Container */}
