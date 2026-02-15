@@ -12,9 +12,9 @@ import * as THREE from "three";
  * color → planet color
  */
 const sponsors = [
-  { name: "Alpha", radius: 4, speed: 0.5, color: "#465753", tiltX: 0, tiltZ: 0 },
-  { name: "Beta", radius: 6, speed: 0.35, color: "#465753", tiltX: 0, tiltZ: -3 },
-  { name: "Gamma", radius: 8, speed: 0.25, color: "#465753", tiltX: 0, tiltZ: 1 },
+  { name: "Alpha", radius: 4, speed: 0.3, color: "#465753", tiltX: 0, tiltZ: 4 },
+  { name: "Beta", radius: 6, speed: 0.5, color: "#465753", tiltX: 0, tiltZ: -5 },
+  { name: "Gamma", radius: 8, speed: 0.25, color: "#465753", tiltX: 0, tiltZ: 3 },
   { name: "Delta", radius: 10, speed: 0.18, color: "#465753", tiltX: 0, tiltZ: -2 },
 ];
 
@@ -84,8 +84,8 @@ function Core({ color, name }: { color: string; name: string }) {
       {/* Center Label */}
       <Billboard position={[0, 0, 0]}>
       <Text
-        position={[0, 1.8, 2]}   // slightly in front of sphere
-        fontSize={0.5}
+        position={[0, 0, 2]}   // slightly in front of sphere
+        fontSize={0.9}
         color="white"
         anchorX="center"
         anchorY="middle"
@@ -102,16 +102,6 @@ export default function ThreeDSponsors() {
 
   // detect the device
 const [isMobile, setIsMobile] = useState(false);
-
-useEffect(() => {
-  const checkScreen = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
-
-  checkScreen();
-  window.addEventListener("resize", checkScreen);
-  return () => window.removeEventListener("resize", checkScreen);
-}, []);
 
 useEffect(() => {
   if (typeof window === "undefined") return;

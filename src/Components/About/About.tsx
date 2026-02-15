@@ -1,12 +1,15 @@
-import React from "react"
+"use client";
+import React, { useEffect, useState } from "react"
 import { PiGlobeSimple } from "react-icons/pi"
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa"
 import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText";
+import Carousel from "./Carousel";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 
 const About = () => {
@@ -15,58 +18,76 @@ const About = () => {
 
   useGSAP(() => {
 
+    // Split only heading
+    const headingsplit = new SplitText(".heading-text", {
+      type: "chars",
+    });
+
+    const parasplit = new SplitText(".para-text", {
+      type: "lines",
+      linesClass: "para-line"
+    })
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
-        start: "top 80%",
-        end: "bottom 90%",
-        toggleActions: "play none none reverse",
-        scrub: true
+        start: "top 35%",
+        end: "bottom 100%",
+        scrub: 1,
       },
-      defaults: { ease: "power3.out" }
+      defaults: { ease: "power3.out" },
+    });
+
+    tl.from(headingsplit.chars, {
+      y: 80,
+      autoAlpha: 0,
+      stagger: 0.15,
+      duration: 3,
     })
 
-    tl.from(".animate-text", {
-      xPercent: -800,
-      autoAlpha: 0,
-      stagger: 0.1,
-      duration: 2,
-      ease: "elastic.out(1,0.5)",
-    })
-      .from(".image-animation", {
-        xPercent: 800,
-        pin:true,
+      .from(parasplit.lines, {
+        y: 50,
         autoAlpha: 0,
-        duration: 0.5,
-        ease: "elastic.out(1,0.5)",
-      },"<").from(".copyright-animation",{
-        yPercent: -80,
-        autoAlpha: 0,
-        duration: 0.1,
-        ease: "elastic",
-      })
-      .from(".button-animation", {
-        xPercent: 200,
+        filter: "blur(8px)",
+        stagger: 0.2,
+        duration: 1.2,
+        ease: "power3.out",
+      }, "-=1.5")
+
+      .from(".arrow", {
+        x: -40,
         autoAlpha: 0,
         duration: 0.6,
-        ease: "power1.inOut",
-      },"<")
-      .from(".arrow", {
-        xPercent: -150,
-        autoAlpha: 0,
-        duration: 1,
-        ease: "bounce.out",
-      })
-      .from(".icons-animation", {
-        yPercent: -80,
-        xPercent:-40,
-        autoAlpha: 0,
-        duration: 1,
-        ease: "elastic",
-        stagger:0.2
-      })
+        ease: "bounce.out"
+      }, "-=0.8")
 
+      .from(".image-animation", {
+        x: 10,
+        autoAlpha: 0,
+        duration: 5,
+      }, "-=0.8")
+
+      // Button
+      .from(".button-animation", {
+        y: 40,
+        autoAlpha: 0,
+        duration: 1,
+      }, "-=0.6")
+
+      // Icons
+      .from(".icons-animation", {
+        y: 30,
+        autoAlpha: 0,
+        stagger: 0.15,
+        duration: 2,
+        delay:1,
+      }, "-=1")
+
+
+    return () => {
+      headingsplit.revert();
+      parasplit.revert();
+    }
   }, { scope: container })
 
   const socialLinks = [
@@ -79,7 +100,7 @@ const About = () => {
   return (
     <div
       ref={container}
-      className="bg-[#211E1B] min-h-screen flex flex-col overflow-x-hidden text-white pt-20"
+      className="bg-[#211E1B] h-100vh flex flex-col overflow-x-hidden text-white pt-20"
     >
       {/* Main Content Wrapper */}
       <div className="flex flex-col lg:flex-row flex-1 w-full gap-20 px-5 lg:px-30 py-1 ">
@@ -90,7 +111,7 @@ const About = () => {
           {/* Heading */}
           <div className="flex flex-col">
             <h1
-              className="animate-text text-4xl md:text-5xl lg:text-7xl text-white mt-9 leading-tight text-spread tracking-widest"
+              className="heading-text text-4xl md:text-5xl lg:text-7xl text-white mt-9 leading-tight text-spread tracking-widest"
               style={{ textShadow: "5px 5px 1px rgba(0,0,0,2)" }}
             >
               ABOUT <span className=" text-[#F27C06]">GDGC ACE</span>
@@ -99,17 +120,18 @@ const About = () => {
             <span className="arrow text-[#F27C06] text-5xl font-serif font-bold lg:relative top-0 left-50 mb-6">&gt;&gt;&gt;&gt;&gt;&gt;</span>
 
           </div>
-          <p className="animate-text text-xl lg:text-2xl text-white lg:max-w-2xl mb-10 lg:leading-11 lg:tracking-wider">
+          <p className="para-text text-xl lg:text-2xl text-white lg:max-w-2xl mb-10 lg:leading-11 lg:tracking-wider">
             GDGC ACE empowers tech enthusiasts. We foster a vibrant community through
             workshops, hackathons, and industry connections. Our members explore
             cutting-edge technologies, build strong portfolios, and gain the skills to
             succeed in the evolving tech world.
           </p>
 
+          <a href="https://www.gdgcace.in/" target="_blank">
           <button className="button-animation bg-[#F27C06] active:scale-120 px-6 py-4 rounded-xl lg:text-2xl text-xl text-center text-white tracking-wider">
             VISIT GDGC OFFICIAL WEBSITE
           </button>
-
+          </a>
         </div>
 
         {/* Image Area - Right */}
@@ -119,23 +141,23 @@ const About = () => {
               clipPath: "url(#aboutInvertedShape)",
               WebkitClipPath: "url(#aboutInvertedShape)"
             }}>
-            <span className="text-gray-500 italic">Image Gallery Placeholder</span>
+              <Carousel/>
           </div>
         </div>
       </div>
 
       {/* Footer Section */}
       <footer className="w-full py-6 px-20 md:py-8 flex flex-col md:flex-row justify-between text-center items-center gap-6 ">
-        <p className="text-white text-xl md:text-2xl copyright-animation">
+        <p className="text-white text-xl md:text-2xl icon-animation">
           © 2025-26 GDGC ACE
         </p>
         <div className="flex gap-6 md:gap-10">
-    {socialLinks.map(({ Icon, url }, index) => (
-      <a key={index} href={url} target="_blank" rel="noopener noreferrer" className="icons-animation">
-        <Icon className={`text-4xl md:text-5xl active:scale-110 ${url.includes('gdgcace') ? 'bg-white p-1 text-[#211E1B] rounded-full hover:bg-[#F27C06]' : 'hover:text-[#F27C06]'}`} />
-      </a>
-    ))}
-  </div>
+          {socialLinks.map(({ Icon, url }, index) => (
+            <a key={index} href={url} target="_blank" rel="noopener noreferrer" className="icons-animation">
+              <Icon className={`text-4xl md:text-5xl active:scale-110 ${url.includes('gdgcace') ? 'bg-white p-1 text-[#211E1B] rounded-full hover:bg-[#F27C06]' : 'hover:text-[#F27C06]'}`} />
+            </a>
+          ))}
+        </div>
 
       </footer >
 
