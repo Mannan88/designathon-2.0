@@ -1,27 +1,25 @@
-import GalaxyModel from "@/Components/MissionRewards/components/GalaxyModel"
-import { LeftBar } from "./constants/SvgExporter"
-import { RightBar } from "./constants/SvgExporter"
-import TiltedCard from "./components/TiledCard"
-import FirstPrize from "@/Components/MissionRewards/constants/FirstPrize.svg"
-import SecondPrize from "@/Components/MissionRewards/constants/SecondPrize.svg"
-import ThirdPrize from "@/Components/MissionRewards/constants/ThirdPrize.svg"
-import { useRef, useLayoutEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import GalaxyModel from "@/Components/MissionRewards/components/GalaxyModel";
+import { LeftBar } from "./constants/SvgExporter";
+import { RightBar } from "./constants/SvgExporter";
+import TiltedCard from "./components/TiledCard";
+import FirstPrize from "@/Components/MissionRewards/constants/FirstPrize.svg";
+import SecondPrize from "@/Components/MissionRewards/constants/SecondPrize.svg";
+import ThirdPrize from "@/Components/MissionRewards/constants/ThirdPrize.svg";
+import { useRef, useLayoutEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const MissionRewards = () => {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const paddingRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<HTMLDivElement[]>([])
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const paddingRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Expansion Animation: Margin/Padding removal
-      // We animate the padding of the inner container to 0
-      const expandConfig = {
+      const expandTrigger = {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 85%",
@@ -29,18 +27,31 @@ const MissionRewards = () => {
           scrub: true,
         },
         duration: 1,
-        ease: "power2.out"
-      }
+        ease: "power2.out",
+      };
 
       gsap.to(paddingRef.current, {
-        ...expandConfig,
+        ...expandTrigger,
         padding: 0,
-      })
+      });
 
       gsap.to(contentRef.current, {
-        ...expandConfig,
+        ...expandTrigger,
         borderRadius: 0,
-      })
+        boxShadow: "0 -40px 80px rgba(0,0,0,0.8)",
+      });
+
+      // fade out the shadow after expansion completes
+      gsap.to(contentRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "top -10%",
+          scrub: true,
+        },
+        boxShadow: "0 0px 0px rgba(0,0,0,0)",
+        duration: 1,
+      });
 
       // 2. Cards sequence animation (Pinned)
       const tl = gsap.timeline({
@@ -50,24 +61,36 @@ const MissionRewards = () => {
           end: "+=2500", // Extends the scroll distance
           scrub: 1,
           pin: true,
-        }
-      })
+        },
+      });
 
-      // Initial state
-      gsap.set(cardsRef.current, { y: 100, autoAlpha: 0 })
+      gsap.set(cardsRef.current, { y: 100, autoAlpha: 0 });
 
-      // Sequence: 3rd -> Scroll -> 2nd -> Scroll -> 1st
-      tl.to({}, { duration: 0.1 }) // Slight pause after pinning
-        .to(cardsRef.current[2], { y: 0, autoAlpha: 1, duration: 1, ease: "power2.out" }) // 3rd Prize (Index 2)
+      tl.to({}, { duration: 0.1 }) // slight pause 
+        .to(cardsRef.current[2], {
+          y: 0,
+          autoAlpha: 1,
+          duration: 1,
+          ease: "power2.out",
+        }) // 3rd Prize
         .to({}, { duration: 0.5 }) // Scroll space
-        .to(cardsRef.current[0], { y: 0, autoAlpha: 1, duration: 1, ease: "power2.out" }) // 2nd Prize (Index 0)
+        .to(cardsRef.current[0], {
+          y: 0,
+          autoAlpha: 1,
+          duration: 1,
+          ease: "power2.out",
+        }) // 2nd Prize 
         .to({}, { duration: 0.5 }) // Scroll space
-        .to(cardsRef.current[1], { y: 0, autoAlpha: 1, duration: 1, ease: "power2.out" }) // 1st Prize (Index 1)
-        .to({}, { duration: 0.5 }) // Hold at the end
-
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
+        .to(cardsRef.current[1], {
+          y: 0,
+          autoAlpha: 1,
+          duration: 1,
+          ease: "power2.out",
+        }) // 1st Prize
+        .to({}, { duration: 0.5 }); 
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
 
   const prizes = [
     {
@@ -79,7 +102,7 @@ const MissionRewards = () => {
       position: "2",
       follower: "nd",
       textColor: "#F27C06",
-      className: "order-2 md:order-none"
+      className: "order-2 md:order-none",
     },
     {
       imageSrc: FirstPrize,
@@ -90,7 +113,7 @@ const MissionRewards = () => {
       position: "1",
       follower: "st",
       textColor: "#F5F5F5",
-      className: "order-1 md:order-none"
+      className: "order-1 md:order-none",
     },
     {
       imageSrc: ThirdPrize,
@@ -101,27 +124,41 @@ const MissionRewards = () => {
       position: "3",
       follower: "rd",
       textColor: "#211E1B",
-      className: "order-3 md:order-none"
-    }
-  ]
+      className: "order-3 md:order-none",
+    },
+  ];
 
   return (
-    <div ref={sectionRef} className="relative w-full min-h-screen overflow-hidden">
+    <div
+      ref={sectionRef}
+      className="relative w-full min-h-screen overflow-hidden"
+    >
       <div ref={paddingRef} className="w-full h-full p-4 md:p-8">
-        <div ref={contentRef} className="relative w-full h-full bg-[#000000] rounded-4xl overflow-hidden">
+        <div
+          ref={contentRef}
+          className="relative w-full h-full bg-[#000000] rounded-4xl overflow-hidden"
+        >
           <GalaxyModel />
           <div className="relative flex flex-col items-center justify-center pointer-events-none z-10 py-12 min-h-screen">
-            <div className="flex flex-wrap text-5xl md:text-8xl gap-4 md:gap-10 justify-center w-full items-center px-4">
-              <div className="hidden xl:block"><LeftBar width="300" /></div>
-              <h1 className="text-center">MISSION <span className="text-accent">REWARDS</span></h1>
-              <div className="hidden xl:block"><RightBar width="300" /></div>
+            <div className="flex flex-wrap text-5xl md:text-7xl gap-4 md:gap-10 justify-center w-full items-center px-4">
+              <div className="hidden xl:block">
+                <LeftBar width="300" />
+              </div>
+              <h1 className="text-center">
+                MISSION <span className="text-accent">REWARDS</span>
+              </h1>
+              <div className="hidden xl:block">
+                <RightBar width="300" />
+              </div>
             </div>
             <div className="cards-container pointer-events-none flex w-full justify-center md:justify-evenly items-center flex-wrap gap-10 px-4">
               {prizes.map((prize, index) => (
                 <div
                   key={index}
                   className={`pointer-events-auto ${prize.className}`}
-                  ref={(el) => { if (el) cardsRef.current[index] = el }}
+                  ref={(el) => {
+                    if (el) cardsRef.current[index] = el;
+                  }}
                 >
                   <TiltedCard
                     imageSrc={prize.imageSrc}
@@ -149,7 +186,7 @@ const MissionRewards = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default MissionRewards;

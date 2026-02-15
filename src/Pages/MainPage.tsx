@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import About from "@/Components/About/About";
 import Faqs from "@/Components/FAQs/Faqs";
 import HeroSection from "@/Components/HeroSection/HeroSection";
@@ -8,12 +10,48 @@ import MissionRewards from "@/Components/MissionRewards/MissionRewards";
 import Sponsors from "@/Components/Sponsors/Sponsors";
 import TimeLine from "@/Components/TimeLine/TimeLine";
 import { useLenis } from "@/lib/Lenis";
+import Preloader from "@/Components/Preloader";
+
+const ASSETS_TO_PRELOAD = [
+  "/images/mission_logs/drill.gif",
+  "/images/mission_logs/sponge.gif",
+  "/images/mission_logs/globe.svg",
+  "/images/mission_logs/mesh.svg",
+  "/images/mission_logs/milkyway.png",
+];
 
 const MainPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const lenis = useLenis();
 
+  // scale-down Mission Logs as Rewards enters
+  useLayoutEffect(() => {
+    if (isLoading) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const missionLogs = document.querySelector(".mission-logs-sticky");
+    const rewards = document.getElementById("rewards");
+    if (!missionLogs || !rewards) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(missionLogs, {
+        scale: 0.92,
+        opacity: 0.5,
+        filter: "blur(2px)",
+        scrollTrigger: {
+          trigger: rewards,
+          start: "top 90%",
+          end: "top 20%",
+          scrub: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [isLoading]);
+
   useEffect(() => {
-    if (!lenis) return;
+    if (!lenis || isLoading) return;
 
     let isScrolling = false;
 
@@ -64,33 +102,45 @@ const MainPage = () => {
       // @ts-ignore
       lenis.off('scroll', handleScroll);
     };
-  }, [lenis]);
+  }, [lenis, isLoading]);
+
   return (
     <>
-      <div id="home">
-        <HeroSection />
-      </div>
-      <div id="mission-logs">
-        <MissionLogs />
-      </div>
-      <div id="rewards">
-        <MissionRewards />
-      </div>
-      <div id="timeline">
-        <TimeLine />
-      </div>
-      <div id="guidelines">
-        <MissionGuidelines />
-      </div>
-      <div id="sponsors">
-        <Sponsors />
-      </div>
-      <div id="faqs">
-        <Faqs />
-      </div>
-      <div id="about">
-        <About />
-      </div>
+      <Preloader assets={ASSETS_TO_PRELOAD} onComplete={() => setIsLoading(false)} />
+      
+      {!isLoading && (
+        <div className="animate-in fade-in duration-700">
+          <div id="home">
+            <HeroSection />
+          </div>
+
+          {/* stack-over container: Mission Logs stays sticky while Rewards slides up */}
+          <div className="relative">
+            <div id="mission-logs" className="sticky top-0 z-10 mission-logs-sticky">
+              <MissionLogs />
+            </div>
+            <div id="rewards" className="relative z-20">
+              <MissionRewards />
+            </div>
+          </div>
+
+          <div id="timeline" className="relative z-20">
+            <TimeLine />
+          </div>
+          <div id="guidelines" className="relative z-20">
+            <MissionGuidelines />
+          </div>
+          <div id="sponsors" className="relative z-20">
+            <Sponsors />
+          </div>
+          <div id="faqs" className="relative z-20">
+            <Faqs />
+          </div>
+          <div id="about" className="relative z-20">
+            <About />
+          </div>
+        </div>
+      )}
     </>
   );
 };

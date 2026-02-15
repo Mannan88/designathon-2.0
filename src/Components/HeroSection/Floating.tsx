@@ -27,7 +27,7 @@ const FloatingObject = ({
 
   return (
     <div
-      className={`absolute z-99 pointer-events-none will-change-transform ${wrapperClassName}`}
+      className={`absolute z-3 pointer-events-none will-change-transform ${wrapperClassName}`}
     >
       <div
         className={`will-change-transform backface-hidden ${innerClassName}`}
