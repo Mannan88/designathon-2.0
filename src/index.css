@@ -135,6 +135,7 @@
 @layer base {
   * {
     @apply border-border;
+    scrollbar-width: none;
   }
   html {
     /* scroll-snap-type removed */
@@ -154,7 +155,7 @@
 }
 
 @theme inline {
-  --animate-grid: grid 15s linear infinite;
+  --animate-grid: grid 20s linear infinite;
   @keyframes grid {
     0% {
       transform: translateY(-50%);
