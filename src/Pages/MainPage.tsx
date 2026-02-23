@@ -130,9 +130,9 @@ const MainPage = () => {
           <div id="guidelines" className="relative z-20">
             <MissionGuidelines />
           </div>
-          <div id="sponsors" className="relative z-20">
+          {/* <div id="sponsors" className="relative z-20">
             <Sponsors />
-          </div>
+          </div> */}
           <div id="faqs" className="relative z-20">
             <Faqs />
           </div>
