@@ -14,7 +14,6 @@ const MissionRewards = () => {
   const titleRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    // We use matchMedia to define different animations for desktop and mobile
     const mm = gsap.matchMedia();
 
     mm.add(
@@ -28,7 +27,6 @@ const MissionRewards = () => {
           isMobile: boolean;
         };
 
-        // Section scale-up: only on desktop to avoid mobile layout thrashing
         if (isDesktop) {
           gsap.fromTo(
             contentRef.current,
@@ -52,7 +50,6 @@ const MissionRewards = () => {
           );
         }
 
-        // Common title entrance
         gsap.fromTo(
           titleRef.current,
           { y: 30, opacity: 0 },
@@ -63,7 +60,7 @@ const MissionRewards = () => {
             ease: "power3.out",
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: "top 50%", // Adjusted for better timing on mobile
+              start: "top 50%",
               end: "top top",
               scrub: true,
             },
@@ -74,12 +71,9 @@ const MissionRewards = () => {
         const cards = cardsRef.current.filter(Boolean);
 
         if (isDesktop) {
-          // ===============================
-          // DESKTOP ANIMATION: TILT -> SPREAD
-          // ===============================
           const revealOrder = [2, 0, 1]; // 3rd -> 2nd -> 1st
 
-          // initial: cards tilted with slight offset
+          // initial
           cards.forEach((card, i) => {
             const direction = i === 1 ? 0 : i === 0 ? -1 : 1;
             gsap.set(card, {
@@ -92,7 +86,7 @@ const MissionRewards = () => {
               yPercent: 0,
               opacity: 1,
               force3D: true,
-              position: "static", // ensuring static on desktop
+              position: "static", // static on desktop
             });
           });
 
@@ -129,16 +123,10 @@ const MissionRewards = () => {
 
           tl.to({}, { duration: 0.4 });
         } else if (isMobile) {
-          // ===============================
-          // MOBILE ANIMATION: ROLLING TIRE Effect
-          // ===============================
-
-          // Reset cards to default state for absolute positioning
           cards.forEach((card) => {
-            // Card starting state: pushed way down, rotated back slightly, and hidden
             gsap.set(card, {
-              yPercent: 150, // Start below screen relative to its container
-              rotateX: -45, // Tilted backwards like a tire rolling in
+              yPercent: 150,
+              rotateX: -45,
               scale: 0.8,
               opacity: 0,
               transformOrigin: "center center",
@@ -161,9 +149,8 @@ const MissionRewards = () => {
           tl.to({}, { duration: 0.1 }); // slight delay before first actions
 
           const animationDuration = 1;
-          const rotateAmount = 45; // How much it tilts backwards/forwards
+          const rotateAmount = 45;
 
-          // Mobile reveal order: 1st, 2nd, 3rd. Array indices: [0]=2nd, [1]=1st, [2]=3rd.
           const mobileRevealOrder = [1, 0, 2];
 
           mobileRevealOrder.forEach((cardIndex, i) => {
@@ -178,21 +165,17 @@ const MissionRewards = () => {
                 scale: 1,
                 opacity: 1,
                 duration: animationDuration,
-                ease: "power2.inOut", // matching ease to sync perfectly with exit
+                ease: "power2.inOut",
               },
               i === 0 ? ">" : "<",
-            ); // "<" makes it start at the exact same time as the previous animation finishes (the hold/exit phase)
-
-            // Hold the card in the center for a brief moment
+            );
             tl.to({}, { duration: 0.6 });
 
-            // 2. Roll OUT to top (unless it's the very last card)
             if (i < mobileRevealOrder.length - 1) {
               tl.to(card, {
-                yPercent: -200, // Move completely out of view
-                rotateX: rotateAmount, // Tilt forward simulating rolling away
+                yPercent: -200,
+                rotateX: rotateAmount,
                 scale: 0.8,
-                // Purposely NOT fading opacity to 0 here per user request
                 duration: animationDuration,
                 ease: "power2.inOut",
               });
@@ -255,7 +238,7 @@ const MissionRewards = () => {
         style={{ transformOrigin: "center top", willChange: "transform" }}
       >
         <GalaxyModel />
-        <div className="relative flex flex-col items-center justify-start md:justify-center pointer-events-none z-10 py-16 sm:py-12 min-h-screen gap-12 sm:gap-6 md:gap-0">
+        <div className="relative flex flex-col items-center justify-center pointer-events-none z-10 py-10 sm:py-12 min-h-screen gap-6 sm:gap-6 md:gap-0">
           <div
             ref={titleRef}
             className="flex flex-wrap text-5xl lg:text-7xl xl:text-8xl leading-none text-accent font-share-tech uppercase tracking-tighter drop-shadow-2xl text-center whitespace-nowrap gap-2 sm:gap-4 md:gap-10 justify-center w-full items-center px-4"
@@ -271,7 +254,7 @@ const MissionRewards = () => {
             </div>
           </div>
 
-          <div className="cards-container pointer-events-none flex w-full relative md:static justify-center md:justify-evenly items-center flex-wrap gap-4 sm:gap-6 md:gap-10 px-2 sm:px-4 mt-8 sm:mt-0 flex-1 md:flex-none h-[65vh] md:h-auto">
+          <div className="cards-container pointer-events-none flex w-full relative md:static justify-center md:justify-evenly items-center flex-wrap gap-4 sm:gap-6 md:gap-10 px-2 sm:px-4 mt-0 sm:mt-0 flex-1 md:flex-none h-[60vh] md:h-auto -translate-y-4 md:translate-y-0">
             {prizes.map((prize, index) => (
               <div
                 key={index}

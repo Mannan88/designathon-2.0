@@ -39,17 +39,24 @@ const Faqs = () => {
 
   return (
     <section
-      className="relative h-screen min-h-[100dvh] w-full flex flex-col lg:flex-row bg-black bg-cover bg-center bg-no-repeat overflow-hidden z-0"
+      className="relative  h-screen min-h-dvh w-full flex flex-col lg:flex-row bg-black bg-cover bg-center bg-no-repeat overflow-hidden z-0"
       style={{ backgroundImage: `url('${assets.faqs.background}')` }}
     >
-      <div className="z-30 lg:hidden pt-10 flex w-full mx-auto items-center justify-center opacity-90 pointer-events-none">
-        <h1 className="text-white text-[4rem] sm:text-[5.5rem] md:text-[6.5rem] font-sans font-bold whitespace-nowrap tracking-tight leading-none drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] text-center">
-          FAQs
+      {/* mobile title */}
+      <div className="z-30 mb-12 lg:hidden pt-6 pb-0 flex w-full mx-auto items-center justify-center pointer-events-none shrink-0">
+        <h1 className="absolute  top-6 lg:top-8 left-1/2 -translate-x-1/2 z-30 text-5xl lg:text-7xl xl:text-8xl leading-none text-accent font-share-tech uppercase tracking-tighter drop-shadow-2xl text-center whitespace-nowrap">
+          FAQ<span className="text-white lowercase">s</span>
         </h1>
       </div>
-
-      <div className="relative w-full h-[100dvh] lg:h-full lg:w-[60%] flex items-center justify-center lg:justify-start lg:pl-10 xl:pl-20 pointer-events-none pb-20 lg:pb-0">
-        <div className="relative w-[700px] h-[1000px] shrink-0 scale-[0.70] sm:scale-[0.80] md:scale-[0.95] lg:scale-[0.7] xl:scale-[0.85] 2xl:scale-[0.95] origin-center lg:origin-left -mt-[24vh] lg:mt-0 lg:ml-0 translate-x-[-15%] sm:-translate-x-[5%] lg:translate-x-0 pointer-events-auto">
+      <div className="absolute inset-0 top-0 w-full h-full opacity-90 pointer-events-none">
+        <OptimizedImage
+          src={assets.faqs.gif}
+          alt="FAQ Animate"
+          className="w-full h-full top-[-24vh]  right-[-36vw] object-contain absolute top-0 m-auto pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        />
+      </div>
+      <div className="relative w-full flex-1 lg:h-full lg:w-[60%] flex items-center justify-center lg:justify-start lg:pl-10 xl:pl-20 pointer-events-none pb-0 lg:pb-0">
+        <div className="relative w-[700px] h-[1000px] shrink-0 scale-[0.55] sm:scale-[0.70] md:scale-[0.85] lg:scale-[0.7] xl:scale-[0.85] 2xl:scale-[0.95] origin-center lg:origin-left -mt-[28vh] sm:-mt-[24vh] lg:mt-0 lg:ml-0 translate-x-[-15%] sm:-translate-x-[5%] lg:translate-x-0 pointer-events-auto">
           {/* origin block */}
           <div className="absolute top-[0px] left-28 w-40 h-44 bg-primary rounded-tl-4xl rounded-tr-4xl rounded-bl-4xl z-10" />
 
@@ -224,6 +231,7 @@ const Faqs = () => {
                 alt="Jupiter"
                 className="w-52 h-52 max-w-none object-contain transition-transform duration-500 group-hover:scale-[1.05]"
               />
+
               <div className="absolute inset-0 flex items-center justify-center -translate-y-[2px]">
                 <span className="text-white font-bold text-[16px] text-center leading-[1.1] tracking-widest uppercase filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-105">
                   Got More
