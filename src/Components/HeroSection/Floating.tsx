@@ -1,7 +1,7 @@
 import OptimizedImage from "@/Components/OptimizedImage";
 
-const PARALLAX_ROTATION_CAP = 5;
-const PARALLAX_TRANSLATE_CAP = 10;
+const PARALLAX_ROTATION_CAP = 12;
+const PARALLAX_TRANSLATE_CAP = 25;
 
 interface FloatingObjectProps {
   src: string;

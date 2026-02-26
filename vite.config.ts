@@ -6,12 +6,14 @@ import tailwindcss from "@tailwindcss/vite";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
     },
+  },
+  server: {
+    allowedHosts: ["8ea3-150-242-24-157.ngrok-free.app"],
   },
 });

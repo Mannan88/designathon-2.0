@@ -26,9 +26,9 @@ const guidelineContent = [
 const MainGridContainer = () => {
   return (
     <div className="relative mx-auto h-full max-w-7xl px-4 py-4 md:px-6 lg:py-8">
-      <h2 className="mb-6 text-center text-4xl font-bold text-white md:text-7xl">
-        MISSION GUIDELINES
-      </h2>
+      <h1 className="mb-12 z-30 text-5xl lg:text-7xl xl:text-8xl leading-none text-accent font-share-tech uppercase tracking-tighter drop-shadow-2xl text-center whitespace-nowrap">
+        MISSION <span className="text-white">GUIDELINES</span>
+      </h1>
 
       <div className="mx-auto space-y-0 lg:hidden">
         <MobileCard

@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef, useCallback } from "react";
 import { RetroGrid } from "../retro-grid";
 import NavigationMenu from "../navigationMenu";
 import CountUp from "../CountUp";
@@ -7,8 +6,12 @@ import DecryptedText from "../DecryptedText";
 import FloatingObject from "./Floating";
 import { assets } from "@/lib/assets";
 import SocialIcons from "./SocialIcons";
+import { useCountdown } from "./hooks/useCountdown";
+import { useParallax } from "./hooks/useParallax";
+import Timer from "./components/Timer";
+import GdgIcon from "./components/GdgIcon";
 
-// inverted corner svg used in countdown and prize sections
+// inverted corner svg used in prize section
 const InvertedCornerSVG = ({
   className,
   path,
@@ -29,96 +32,16 @@ const InvertedCornerSVG = ({
 );
 
 const HeroSection = () => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: "00",
-    hours: "00",
-    mins: "00",
-    secs: "00",
-  });
-
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
-  const rafRef = useRef<number>(0);
-  const targetOffset = useRef({ x: 0, y: 0 });
-  const currentOffset = useRef({ x: 0, y: 0 });
-
-  // countdown timer
-  useEffect(() => {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 14);
-
-    const interval = setInterval(() => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((difference / 1000 / 60) % 60);
-        const seconds = Math.floor((difference / 1000) % 60);
-
-        setTimeLeft({
-          days: String(days).padStart(2, "0"),
-          hours: String(hours).padStart(2, "0"),
-          mins: String(minutes).padStart(2, "0"),
-          secs: String(seconds).padStart(2, "0"),
-        });
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // smooth parallax via raf lerp
-  useEffect(() => {
-    const animate = () => {
-      const lerp = 0.06;
-      currentOffset.current.x +=
-        (targetOffset.current.x - currentOffset.current.x) * lerp;
-      currentOffset.current.y +=
-        (targetOffset.current.y - currentOffset.current.y) * lerp;
-
-      setMouseOffset({
-        x: currentOffset.current.x,
-        y: currentOffset.current.y,
-      });
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-
-    targetOffset.current = {
-      x: Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2))),
-      y: Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2))),
-    };
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    targetOffset.current = { x: 0, y: 0 };
-  }, []);
-
-  const countdownUnits = [
-    { value: timeLeft.days, label: "days", accent: true },
-    { value: timeLeft.hours, label: "hours", accent: true },
-    { value: timeLeft.mins, label: "mins", accent: false },
-    { value: timeLeft.secs, label: "secs", accent: false },
-  ];
+  const timeLeft = useCountdown(14);
+  const { mouseOffset, sectionRef, handleMouseMove, handleMouseLeave } =
+    useParallax();
 
   return (
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative h-screen min-h-[100dvh] w-full bg-white p-1 md:p-3 overflow-hidden flex flex-col"
+      className="relative h-screen min-h-screen w-full bg-white p-1 md:p-3 overflow-hidden flex flex-col"
     >
       <div className="relative flex-1 w-full bg-neutral-900 rounded-[2.5rem] overflow-hidden flex flex-col items-center justify-center text-foreground font-sans">
         <RetroGrid
@@ -130,7 +53,7 @@ const HeroSection = () => {
         />
 
         {/* gdgc logo */}
-        <div className="absolute z-12 -top-16 w-28 h-28 rounded-full left-1/2 -translate-x-1/2 bg-white" />
+        <GdgIcon />
         <div className="absolute md:-top-2.5 -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
           <img
             src={assets.hero.gdgLogo}
@@ -161,47 +84,7 @@ const HeroSection = () => {
         </div>
 
         {/* countdown panel */}
-        <div className="absolute top-24 left-0 z-50 lg:drop-shadow-xl">
-          <div className="relative bg-white rounded-r-3xl py-3 md:py-4 pl-3 md:pl-4 pr-1.5 flex flex-row items-center">
-            <InvertedCornerSVG
-              className="absolute -bottom-[23.5px] left-[-1px] w-6 h-6 text-white"
-              path="M0 0v24C0 10.745 10.745 0 24 0z"
-            />
-            <InvertedCornerSVG
-              className="absolute -top-[18px] left-[-1px] w-6 h-6 text-white"
-              path="M0 24V0C0 13.255 10.745 24 24 24z"
-            />
-
-            <div className="flex flex-col items-center gap-1.5 md:gap-2 pr-4 py-4">
-              {countdownUnits.map((unit) => (
-                <div
-                  key={unit.label}
-                  className="flex flex-col items-center leading-none"
-                >
-                  <span
-                    className={`text-base md:text-2xl font-bold font-inter ${
-                      unit.accent ? "text-accent" : "text-neutral-700"
-                    }`}
-                  >
-                    {unit.value}
-                  </span>
-                  <span className="text-[7px] md:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
-                    {unit.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div
-              className="text-[7px] md:text-[12px] uppercase tracking-[0.15em] text-black/90 font-medium ml-1 select-none"
-              style={{
-                writingMode: "vertical-rl",
-                textOrientation: "mixed",
-                transform: "rotate(180deg)",
-              }}
-            />
-          </div>
-        </div>
+        <Timer timeLeft={timeLeft} />
 
         {/* background 2.0 text */}
         <div className="absolute inset-0 flex items-center justify-center z-1 pointer-events-none select-none overflow-hidden">
@@ -241,7 +124,7 @@ const HeroSection = () => {
         <FloatingObject
           src={assets.hero.laptop}
           alt="Laptop"
-          wrapperClassName="z-5 bottom-[16%] left-[5%] md:bottom-[6%] md:left-[2%] lg:left-[5%] animate-float-3"
+          wrapperClassName="z-5 bottom-[12%] left-[5%] md:bottom-[6%] md:left-[2%] lg:left-[5%] animate-float-3"
           innerClassName="w-48 h-48 md:w-48 md:h-36 lg:w-96 lg:h-87 rotate-[-8deg]"
           parallaxFactor={0.7}
           mouseOffset={mouseOffset}
@@ -287,13 +170,14 @@ const HeroSection = () => {
           mouseOffset={mouseOffset}
         />
 
-        {/* astronaut */}
+        {/* astronaut with amplified parallax */}
         <div className="absolute z-7 pointer-events-none left-1/2 -translate-x-1/2 top-[32%] md:top-[20%] w-78 h-78 md:w-100 md:h-100 lg:w-128 lg:h-128">
           <div className="animate-float-3">
             <div
               className="will-change-transform backface-hidden"
               style={{
-                transform: `translate3d(${mouseOffset.x * 5}px, ${mouseOffset.y * 5}px, 0) rotateX(${-mouseOffset.y * 2}deg) rotateY(${mouseOffset.x * 2}deg)`,
+                transform: `translate3d(${mouseOffset.x * 18}px, ${mouseOffset.y * 18}px, 0) rotateX(${-mouseOffset.y * 6}deg) rotateY(${mouseOffset.x * 6}deg)`,
+                transition: "transform 0.05s linear",
               }}
             >
               <img
@@ -352,9 +236,10 @@ const HeroSection = () => {
         </div>
 
         <SocialIcons />
+        <div className="h-30 md:hidden z-99 w-full bg-white absolute bottom-0 right-0"></div>
 
         {/* prize pool + join now */}
-        <div className="absolute bottom-0 right-0 z-20 lg:drop-shadow-2xl">
+        <div className="absolute bottom-30 md:bottom-0  right-0 z-20 lg:bottom-0 lg:drop-shadow-2xl">
           <div className="relative bg-white rounded-tl-4xl p-2 flex flex-row items-center">
             <InvertedCornerSVG
               className="absolute -top-[31.5px] right-[-1px] w-8 h-8 text-white"
