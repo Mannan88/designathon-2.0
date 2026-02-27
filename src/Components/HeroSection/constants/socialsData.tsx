@@ -1,7 +1,6 @@
 import type { ReactElement } from "react";
-import { Twitter, Globe, Linkedin, Instagram } from "lucide-react"; // adjust import source
+import { Twitter, Globe, Linkedin, Instagram } from "lucide-react";
 
-// Define the shape of a social item
 export interface SocialItem {
   id: number;
   name: string;
@@ -11,14 +10,15 @@ export interface SocialItem {
   href: string;
 }
 
-// Strongly typed array of social items
+const SOCIAL_PLACEHOLDER =
+  "https://res.cloudinary.com/dkysrpdi6/image/upload/v1767816590/Background_o5aaeh.png";
+
 export const socialItems: SocialItem[] = [
   {
     id: 1,
     name: "Twitter",
     designation: "Follow Updates",
-    image:
-      "https://res.cloudinary.com/dkysrpdi6/image/upload/v1767816590/Background_o5aaeh.png",
+    image: SOCIAL_PLACEHOLDER,
     icon: (
       <Twitter
         size={24}
@@ -44,8 +44,7 @@ export const socialItems: SocialItem[] = [
     id: 3,
     name: "LinkedIn",
     designation: "Connect with us",
-    image:
-      "https://res.cloudinary.com/dkysrpdi6/image/upload/v1767816590/Background_o5aaeh.png",
+    image: SOCIAL_PLACEHOLDER,
     icon: (
       <Linkedin
         size={24}
@@ -58,8 +57,7 @@ export const socialItems: SocialItem[] = [
     id: 4,
     name: "Instagram",
     designation: "See our gallery",
-    image:
-      "https://res.cloudinary.com/dkysrpdi6/image/upload/v1767816590/Background_o5aaeh.png",
+    image: SOCIAL_PLACEHOLDER,
     icon: (
       <Instagram
         size={24}

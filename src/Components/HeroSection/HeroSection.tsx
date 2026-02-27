@@ -1,6 +1,6 @@
 import { useCountdown } from "./hooks/useCountdown.js";
 import { useParallax } from "./hooks/useParallax.js";
-import { socialItems } from "./constants/socialsData.js";
+import SocialIcons from "./SocialIcons.js";
 import { RetroGrid } from "../retro-grid";
 import GdgIcon from "./components/GdgIcon.js";
 import CountUp from "../CountUp.jsx";
@@ -10,6 +10,8 @@ import FloatingObject from "./Floating.js";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { assets } from "@/lib/assets.js";
 import Timer from "./components/Timer.js";
+import NavigationMenu from "../navigationMenu.js";
+
 
 const HeroSection = () => {
 
@@ -25,17 +27,9 @@ const HeroSection = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative h-screen w-full bg-white overflow-hidden flex flex-col px-3"
-    >      {/* bolt 5 - bottom center on grid/white intersection */}
-      <FloatingObject
-        src="/images/hero/bolt.png"
-        alt="Bolt"
-        wrapperClassName=" -bottom-14 left-[46%] md:left-[48%] animate-float-3 [animation-delay:1s]"
-        innerClassName="w-6 h-6 md:w-64 md:h-64 rotate-[40deg]"
-        parallaxFactor={0.5}
-        mouseOffset={mouseOffset}
-      />
-      <div className="relative w-full h-full my-3 bg-neutral-900 rounded-t-[2.5rem] overflow-hidden flex flex-col items-center justify-center text-foreground font-sans">
+      className="relative h-screen min-h-screen w-full bg-white p-1 md:p-3 overflow-hidden flex flex-col"
+    >
+      <div className="relative flex-1 w-full bg-neutral-900 rounded-[2.5rem] overflow-hidden flex flex-col items-center justify-center text-foreground font-sans">
         <RetroGrid
           className="absolute inset-0 z-0 h-full w-full opacity-60 pointer-events-none"
           angle={65}
@@ -44,9 +38,19 @@ const HeroSection = () => {
           darkLineColor="#f1f5f9"
         />
 
+        {/* gdgc logo */}
         <GdgIcon />
-        {/* hamburger */}
-        {/* <NavigationMenu /> */}
+        <div className="absolute md:-top-2.5 -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+          <img
+            src={assets.hero.gdgLogo}
+            alt="GDG Logo"
+            className="w-12 h-12 md:w-14 md:h-14 object-contain"
+            decoding="async"
+            draggable={false}
+          />
+        </div>
+
+        <NavigationMenu />
 
         {/* gdg text below logo */}
         <div className="absolute top-16 md:top-18 left-1/2 -translate-x-1/2 z-15 flex flex-col items-center space-y-0.5">
@@ -65,7 +69,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* === COUNTDOWN TOP-LEFT === */}
+        {/* countdown panel */}
         <Timer timeLeft={timeLeft} />
 
         {/* background 2.0 text */}
@@ -80,18 +84,18 @@ const HeroSection = () => {
 
         {/* floating objects */}
         <FloatingObject
-          src="/images/hero/topleft-camera-v1.png"
+          src={assets.hero.topleftCamera}
           alt="Camera tool"
-          wrapperClassName="z-8 -top-10 left-[-2%] md:left-[2%] animate-float-1"
-          innerClassName="w-44 h-44 md:w-56 md:h-56 lg:w-92 lg:h-92"
+          wrapperClassName="z-8 top-[-5px] left-[-20px] md:top-0 md:left-[2%] animate-float-1"
+          innerClassName="w-56 h-56 md:w-56 md:h-56 lg:w-108 lg:h-108"
           parallaxFactor={0.6}
           mouseOffset={mouseOffset}
         />
         <FloatingObject
           src={assets.hero.bolt}
           alt="Bolt"
-          wrapperClassName="z-8 top-1/2 -translate-y-20 left-[-2%] md:left-30 animate-float-1"
-          innerClassName="w-5 h-5 md:w-12 md:h-12 rotate-[0deg]"
+          wrapperClassName="z-8 top-56 left-[10%] md:left-[24%] animate-float-1"
+          innerClassName="w-16 h-16 md:w-32 md:h-32 rotate-[0deg]"
           parallaxFactor={0.9}
           mouseOffset={mouseOffset}
         />
@@ -106,61 +110,67 @@ const HeroSection = () => {
         <FloatingObject
           src={assets.hero.laptop}
           alt="Laptop"
-          wrapperClassName="z-5 bottom-[6%] left-[0%] md:left-[2%] lg:left-[5%] animate-float-3"
-          innerClassName="w-36 h-28 md:w-48 md:h-36 lg:w-80  lg:h-80 rotate-[-8deg]"
+          wrapperClassName="z-5 bottom-[12%] left-[5%] md:bottom-[6%] md:left-[2%] lg:left-[5%] animate-float-3"
+          innerClassName="w-48 h-48 md:w-48 md:h-36 lg:w-96 lg:h-87 rotate-[-8deg]"
           parallaxFactor={0.7}
           mouseOffset={mouseOffset}
         />
         <FloatingObject
           src={assets.hero.bolt}
           alt="Bolt"
-          wrapperClassName="z-5 top-[10%] left-[28%] md:left-[24%] animate-float-4"
-          innerClassName="w-5 h-5 md:w-24 md:h-24 rotate-[280deg]"
+          wrapperClassName="z-5 top-[20%] left-[32%] md:top-[16%] md:left-[28%] animate-float-4"
+          innerClassName="w-10 h-10 md:w-12 md:h-12 rotate-[280deg]"
           parallaxFactor={0.9}
           mouseOffset={mouseOffset}
         />
         <FloatingObject
           src={assets.hero.bolt}
           alt="Bolt"
-          wrapperClassName="z-5 top-[18%] right-[14%] md:right-[18%] animate-float-5"
-          innerClassName="w-4 h-4 md:w-24 md:h-12 rotate-[140deg]"
+          wrapperClassName="z-5 top-[32%] right-[20%] md:top-[28%] md:right-[18%] animate-float-5"
+          innerClassName="w-12 h-12 md:w-24 md:h-12 rotate-[140deg]"
           parallaxFactor={1.0}
           mouseOffset={mouseOffset}
         />
-
-
-
-        {/* bolt 6 - right side lower */}
         <FloatingObject
           src={assets.hero.bolt}
           alt="Bolt"
-          wrapperClassName="z-5 bottom-[40%] right-[12%] animate-float-5 [animation-delay:1.6s]"
-          innerClassName="w-4 h-4 md:w-20 md:h-20 rotate-270"
+          wrapperClassName="-bottom-4 left-[46%] md:-bottom-8 md:left-[48%] animate-float-3 [animation-delay:1s]"
+          innerClassName="w-16 h-16 md:w-32 md:h-32 rotate-[40deg]"
+          parallaxFactor={0.5}
+          mouseOffset={mouseOffset}
+        />
+        <FloatingObject
+          src={assets.hero.bolt}
+          alt="Bolt"
+          wrapperClassName="z-5 bottom-[45%] right-[18%] md:bottom-[40%] md:right-[12%] animate-float-5 [animation-delay:1.6s]"
+          innerClassName="w-12 h-12 md:w-24 md:h-24 rotate-270"
           parallaxFactor={0.7}
           mouseOffset={mouseOffset}
         />
         <FloatingObject
           src={assets.hero.bottomrightCamera}
           alt="Tool"
-          wrapperClassName="z-5 bottom-[12%] right-[16%] md:right-[16%] animate-float-4 [animation-delay:1.4s]"
-          innerClassName="w-20 h-28 md:w-28 md:h-36 lg:w-50 lg:h-50 rotate-[140deg]"
+          wrapperClassName="z-5 bottom-[15%] right-[5%] md:bottom-[12%] md:right-[16%] animate-float-4 [animation-delay:1.4s]"
+          innerClassName="w-48 h-56 md:w-28 md:h-36 lg:w-56 lg:h-64 rotate-[12deg]"
           parallaxFactor={0.7}
           mouseOffset={mouseOffset}
         />
 
-        {/* astronaut */}
+        {/* astronaut with amplified parallax */}
         <div className="absolute z-7 pointer-events-none left-1/2 -translate-x-1/2 top-[32%] md:top-[20%] w-78 h-78 md:w-100 md:h-100 lg:w-128 lg:h-128">
           <div className="animate-float-3">
             <div
               className="will-change-transform backface-hidden"
               style={{
-                transform: `translate3d(${mouseOffset.x * 5}px, ${mouseOffset.y * 5}px, 0) rotateX(${-mouseOffset.y * 2}deg) rotateY(${mouseOffset.x * 2}deg)`,
+                transform: `translate3d(${mouseOffset.x * 18}px, ${mouseOffset.y * 18}px, 0) rotateX(${-mouseOffset.y * 6}deg) rotateY(${mouseOffset.x * 6}deg)`,
+                transition: "transform 0.05s linear",
               }}
             >
               <img
                 src={assets.hero.astronaut}
                 alt="Astronaut floating in space"
-                className="w-72 h-72 md:w-100 md:h-100 lg:w-148 lg:h-148 object-contain select-none"
+                className="w-78 h-78 md:w-100 md:h-100 lg:w-128 lg:h-128 object-contain select-none"
+                decoding="async"
                 style={{
                   filter: "drop-shadow(0 0 50px rgba(0,0,0,0.5))",
                 }}
@@ -211,57 +221,25 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* === SOCIAL ICONS BOTTOM-LEFT === */}
-        <div className="absolute bottom-0 left-0 z-30 drop-shadow-2xl shadow-none outline-none border-0">
-          <div className="relative bg-white rounded-tr-4xl p-4 md:p-5 pr-8 md:pr-10 pl-6 md:pl-8 flex items-center space-x-0 shadow-none outline-none border-0">
-            {/* inverted corner right */}
+        <SocialIcons />
+        <div className="h-30 md:hidden z-99 w-full bg-white absolute bottom-0 right-0"></div>
 
-            <div
-              className="absolute bottom-[-8px] -right-8 w-10 h-10 bg-white -translate-x-px shadow-none outline-none border-0"
-              style={{
-                maskImage:
-                  "radial-gradient(circle at 100% 0, transparent 2rem, black 2rem)",
-                WebkitMaskImage:
-                  "radial-gradient(circle at 100% 0, transparent 2rem, black 2rem)",
-              }}
-            />
-            {/* inverted corner top */}
-            <div
-              className="absolute -top-8 left-0 w-8 h-8 bg-white translate-y-px shadow-none outline-none border-0 "
-              style={{
-                maskImage:
-                  "radial-gradient(circle at 100% 0, transparent 2rem, black 2rem)",
-                WebkitMaskImage:
-                  "radial-gradient(circle at 100% 0, transparent 2rem, black 2rem)",
-              }}
-            />
-
-            <AnimatedTooltip items={socialItems} />
-          </div>
-        </div>
-
-        {/* === PRIZE POOL + JOIN NOW BOTTOM-RIGHT === */}
-        <div className="absolute bottom-0 right-0 z-20 drop-shadow-2xl">
-          <div className="relative bg-white rounded-tl-4xl pr-2 flex flex-row items-center">
-            {/* inverted corner top */}
-            <div
-              className="absolute -top-8 right-0 w-8 h-8 bg-white translate-y-px"
-              style={{
-                maskImage:
-                  "radial-gradient(circle at 0 0, transparent 2rem, black 2rem)",
-                WebkitMaskImage:
-                  "radial-gradient(circle at 0 0, transparent 2rem, black 2rem)",
-              }}
-            />
+        {/* prize pool + join now */}
+        <div className="absolute bottom-30 md:bottom-0  right-0 z-20 lg:bottom-0 lg:drop-shadow-2xl">
+          <div className="relative bg-white rounded-tl-4xl p-2 flex flex-row items-center">
             {/* <InvertedCornerSVG
+              className="absolute -top-[31.5px] right-[-1px] w-8 h-8 text-white"
+              path="M32 32V0C32 17.67 17.67 32 0 32z"
+            />
+            <InvertedCornerSVG
               className="absolute bottom-[-1px] -left-[31.5px] w-8 h-8 text-white"
               path="M32 32V0C32 17.67 17.67 32 0 32z"
             /> */}
 
             <div className="pl-6  pr-4 md:pr-6 py-3 md:py-4 flex flex-col items-center min-w-28 md:min-w-36">
               <div className="flex items-baseline leading-none">
-                <span className="text-6xl md:text-[5rem] font-bold text-black tracking-tighter">
-                  <CountUp to={50} from={0} duration={2.5} separator="" />
+                <span className="text-5xl md:text-6xl font-bold text-black tracking-tighter">
+                  <CountUp to={60} from={0} duration={1.5} separator="" />
                 </span>
                 <span className="text-2xl md:text-3xl ml-1 font-bold text-black">
                   k

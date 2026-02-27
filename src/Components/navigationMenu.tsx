@@ -265,7 +265,7 @@ export default function NavigationMenu() {
   ];
 
   return (
-    <div ref={containerRef} className="kinetic-nav-root">
+    <div ref={containerRef} className="kinetic-nav-root z-999">
       <div className="site-header-wrapper">
         <header className="header">
           <div className="container is--full">
@@ -324,7 +324,7 @@ export default function NavigationMenu() {
         </header>
       </div>
 
-      <section className="fullscreen-menu-container">
+      <section className="fullscreen-menu-container z-999">
         <div data-nav="closed" className="nav-overlay-wrapper">
           <div className="overlay" onClick={closeMenu}></div>
           <nav className="menu-content">
