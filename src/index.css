@@ -611,3 +611,15 @@ html.lenis body {
 .animate-arrow-step {
   animation: arrow-step 2s ease-in-out infinite;
 }
+
+/* Hide scrollbar globally */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* For Chrome, Safari, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
