@@ -231,7 +231,6 @@ const Faqs = () => {
                 alt="Jupiter"
                 className="w-52 h-52 max-w-none object-contain transition-transform duration-500 group-hover:scale-[1.05]"
               />
-
               <div className="absolute inset-0 flex items-center justify-center -translate-y-[2px]">
                 <span className="text-white font-bold text-[16px] text-center leading-[1.1] tracking-widest uppercase filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-105">
                   Got More
