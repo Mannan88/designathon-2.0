@@ -91,7 +91,7 @@ const MainGridContainer = () => {
                 rel="noopener noreferrer"
                 className="h-9 w-full max-w-[calc(100%-8px)] rounded-md border border-white bg-[#F27C06] text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-orange-600 px-2 flex items-center justify-center"
               >
-                Download Guidelines
+                Download
               </a>
             </div>
           </div>

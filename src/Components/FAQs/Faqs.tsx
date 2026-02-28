@@ -91,7 +91,7 @@ const Faqs = () => {
           </div>
 
           {/* card 2 — WHAT TOOLS CAN WE USE */}
-          <div className="absolute top-48 left-2 w-[260px] h-[340px] sm:w-[260px] sm:h-[360px] z-20">
+          <div className="absolute top-[212px] md:top-48 left-2 w-[260px] h-[340px] sm:w-[260px] sm:h-[360px] z-20">
             <FlippingCard
               variant="white"
               className="!rounded-bl-none shadow-none"
@@ -100,8 +100,17 @@ const Faqs = () => {
             />
           </div>
 
+          <div className="absolute md:hidden   top-[816px]  left-2 w-[224px] h-[340px] z-20">
+            <FlippingCard
+              variant="white"
+              className="!rounded-tl-none shadow-none"
+              frontContent={<CardFront text={faqContent[1].question} />}
+              backContent={<CardBack text={faqContent[1].answer} />}
+            />
+          </div>
+
           {/* connector block */}
-          <div className="absolute top-138 -left-64 w-64 h-72 rounded-br-4xl bg-white z-10" />
+          <div className="absolute top-138 -left-63 md:-left-64 w-64 h-72  bg-white z-10" />
 
           <InvertedCorner
             orientation="bottom-right"
@@ -111,11 +120,27 @@ const Faqs = () => {
           <InvertedCorner
             orientation="top-left"
             colorClassName="text-white"
-            className="top-[550px] -left-[5px] z-20"
+            className="top-[550px] left-[3px] md:-left-[5px] z-20"
+          />
+
+          <InvertedCorner
+            orientation="bottom-left"
+            colorClassName="text-white"
+            className="md:hidden top-[780px] -left-[-4px] z-20"
+          />
+          <InvertedCorner
+            orientation="top-right"
+            colorClassName="text-white"
+            className="md:hidden top-[832px] -left-8 md:-left-[5px] z-20"
+          />
+          <InvertedCorner
+            orientation="top-right"
+            colorClassName="text-white"
+            className="md:hidden top-[816px] -left-8 md:-left-[5px] z-20"
           />
 
           {/* card 3 — HOW WILL JUDGING BE DONE (desktop + mobile) */}
-          <div className="absolute top-[420px] left-[440px] w-52 h-52 sm:w-56 sm:h-56 z-20">
+          <div className="absolute top-[432px] md:top-[416px] left-[480px] w-52 h-52 sm:w-56 sm:h-56 z-20">
             <FlippingCard
               variant="white"
               className="!rounded-bl-none shadow-none"
@@ -125,7 +150,7 @@ const Faqs = () => {
           </div>
 
           {/* card 4 — HOW MANY MEMBERS (desktop + mobile) */}
-          <div className="absolute top-[640px] left-[240px] w-52 h-52 sm:w-56 sm:h-56 z-20">
+          <div className="absolute top-[640px] left-[272px] md:left-[256px] w-52 h-52 sm:w-56 sm:h-56 z-20">
             <FlippingCard
               variant="white"
               className="!rounded-tr-none shadow-none"
@@ -137,18 +162,18 @@ const Faqs = () => {
           <InvertedCorner
             orientation="bottom-right"
             colorClassName="text-white"
-            className="top-[600px] left-[402px] z-20"
+            className="top-[602px] left-[442px] z-20"
           />
 
           <InvertedCorner
             orientation="top-left"
             colorClassName="text-white"
-            className="top-[632px] left-[430px] z-20"
+            className="top-[638px] left-[478px] z-20"
           />
 
           {/* extra mobile-only cards pushed further down for spacing */}
           <div className="md:hidden">
-            <div className="absolute top-[700px] left-[460px] w-48 h-48 sm:w-52 sm:h-52 z-20">
+            <div className="absolute bottom-0 left-[460px] w-48 h-48 sm:w-52 sm:h-52 z-20">
               <FlippingCard
                 variant="white"
                 className="!rounded-bl-none shadow-none"
@@ -157,7 +182,7 @@ const Faqs = () => {
               />
             </div>
 
-            <div className="absolute top-[870px] left-[260px] w-48 h-48 sm:w-52 sm:h-52 z-20">
+            <div className="absolute -bottom-[198px] left-[260px] w-48 h-48 sm:w-52 sm:h-52 z-20">
               <FlippingCard
                 variant="white"
                 className="!rounded-tr-none shadow-none"
@@ -168,18 +193,20 @@ const Faqs = () => {
             <InvertedCorner
               orientation="bottom-right"
               colorClassName="text-white"
-              className="top-[830px] left-[422px] z-20"
+              // className="top-[830px] left-[422px] z-20"
+              className="top-[1028px] left-[422px] z-20"
             />
             <InvertedCorner
               orientation="top-left"
               colorClassName="text-white"
-              className="top-[862px] left-[450px] z-20"
+              // className="top-[862px] left-[450px] z-20"
+              className="top-[1060px] left-[450px] z-20"
             />
           </div>
 
           {/* jupiter discord link — desktop only, fits between card 3 and card 4 */}
           <div
-            className="absolute hidden md:block md:top-[720px] md:left-20 w-[140px] h-[140px] z-20 cursor-pointer group"
+            className="absolute hidden md:block md:top-[660px] md:left-12 w-[140px] h-[140px] z-20 cursor-pointer group"
             onMouseEnter={() => setIsJupiterHovered(true)}
             onMouseLeave={() => setIsJupiterHovered(false)}
             onClick={() => window.open(links.discord, "_blank")}
@@ -298,7 +325,7 @@ const Faqs = () => {
       {/* desktop right panel */}
       <div className="hidden lg:flex relative right-0 w-[40%] h-full flex-col items-center justify-center px-6 lg:p-4 z-20 pointer-events-none">
         <FaqTitle className="text-[7rem] font-sans font-bold whitespace-nowrap tracking-tight leading-none drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] z-20 lg:mb-4 lg:ml-20" />
-        <div className="w-[600px] h-[600px] opacity-90 lg:mt-[-50px]">
+        <div className="pointer-events-none select-none w-[600px] h-[600px] opacity-90 lg:mt-[-50px]">
           <OptimizedImage
             src={assets.faqs.gif}
             alt="FAQ Animate"

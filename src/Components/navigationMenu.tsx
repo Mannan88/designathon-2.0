@@ -334,6 +334,7 @@ export default function NavigationMenu() {
   };
 
   const navItems = [
+    { id: "hero", label: "Home", shape: "3" },
     { id: "#mission-logs", label: "Mission Logs", shape: "2" },
     { id: "#rewards", label: "Rewards", shape: "3" },
     { id: "#timeline", label: "Timeline", shape: "4" },
