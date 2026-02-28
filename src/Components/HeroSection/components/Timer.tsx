@@ -12,7 +12,7 @@ interface TimerProps {
 const Timer = ({ timeLeft }: TimerProps) => {
   return (
     <div style={{ zIndex: 50 }} className="absolute top-24 left-0 drop-shadow-xl">
-      <div className="relative bg-white rounded-r-3xl py-3 md:py-4 pl-3 md:pl-4 pr-1.5 flex flex-row items-center">
+      <div className="relative bg-white rounded-r-3xl py-1 sm:py-4 pl-3 sm:pl-4 flex flex-row items-center">
         {/* rounded white corners */}
         <div
           className="absolute -bottom-6 left-0 w-6 h-6 bg-white"
@@ -33,36 +33,36 @@ const Timer = ({ timeLeft }: TimerProps) => {
           }}
         />
 
-        <div className="flex flex-col items-center gap-1.5 md:gap-2 pr-4 py-4">
+        <div className="flex flex-col items-center gap-1.5 sm:gap-2 pr-4 py-4 sm:py-2">
           <div className="flex flex-col items-center leading-none">
-            <span className="text-base md:text-2xl font-bold text-accent font-inter">
+            <span className="text-xl sm:text-2xl font-bold text-accent font-inter">
               {timeLeft.days}
             </span>
-            <span className="text-[7px] md:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
+            <span className="text-[8px] sm:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
               days
             </span>
           </div>
           <div className="flex flex-col items-center leading-none">
-            <span className="text-base md:text-2xl font-bold text-accent font-inter">
+            <span className="text-xl md:text-2xl font-bold text-accent font-inter">
               {timeLeft.hours}
             </span>
-            <span className="text-[7px] md:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
+            <span className="text-[8px] sm:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
               hours
             </span>
           </div>
           <div className="flex flex-col items-center leading-none">
-            <span className="text-base md:text-2xl font-bold text-neutral-700 font-inter">
+            <span className="text-xl md:text-2xl font-bold text-neutral-700 font-inter">
               {timeLeft.mins}
             </span>
-            <span className="text-[7px] md:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
+            <span className="text-[8px] sm:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
               mins
             </span>
           </div>
           <div className="flex flex-col items-center leading-none">
-            <span className="text-base md:text-2xl font-bold text-neutral-700 font-inter">
+            <span className="text-xl md:text-2xl font-bold text-neutral-700 font-inter">
               {timeLeft.secs}
             </span>
-            <span className="text-[7px] md:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
+            <span className="text-[8px] sm:text-[12px] uppercase tracking-wider text-black/80 mt-0.5 font-bold">
               secs
             </span>
           </div>
