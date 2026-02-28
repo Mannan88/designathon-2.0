@@ -238,10 +238,10 @@ const MissionRewards = () => {
         style={{ transformOrigin: "center top", willChange: "transform" }}
       >
         <GalaxyModel />
-        <div className="relative flex flex-col items-center justify-center pointer-events-none z-10 py-10 sm:py-12 min-h-screen gap-6 sm:gap-6 md:gap-0">
+        <div className="relative flex flex-col items-center justify-start pointer-events-none z-10 py-6 sm:py-8 md:pt-16 lg:pt-20 min-h-screen gap-4 sm:gap-4 md:gap-8">
           <div
             ref={titleRef}
-            className="flex flex-wrap text-5xl lg:text-7xl xl:text-8xl leading-none text-accent font-share-tech uppercase tracking-tighter drop-shadow-2xl text-center whitespace-nowrap gap-2 sm:gap-4 md:gap-10 justify-center w-full items-center px-4"
+            className="flex flex-wrap text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-none text-accent font-share-tech uppercase tracking-tighter drop-shadow-2xl text-center whitespace-nowrap gap-2 sm:gap-4 md:gap-8 justify-center w-full items-center px-4"
           >
             <div className="hidden xl:block">
               <LeftBar width="300" />
@@ -254,11 +254,11 @@ const MissionRewards = () => {
             </div>
           </div>
 
-          <div className="cards-container pointer-events-none flex w-full relative md:static justify-center md:justify-evenly items-center flex-wrap gap-4 sm:gap-6 md:gap-10 px-2 sm:px-4 mt-0 sm:mt-0 flex-1 md:flex-none h-[60vh] md:h-auto -translate-y-4 md:translate-y-0">
+          <div className="cards-container pointer-events-none flex w-full relative md:static justify-center md:justify-evenly items-center flex-wrap gap-4 sm:gap-6 md:gap-6 lg:gap-8 px-2 sm:px-4 mt-0 sm:mt-0 flex-1 md:flex-initial h-[60vh] md:h-auto -translate-y-4 md:translate-y-0">
             {prizes.map((prize, index) => (
               <div
                 key={index}
-                className={`pointer-events-auto absolute md:static md:w-auto w-[75%] max-w-[280px] transform-gpu ${prize.className}`}
+                className={`pointer-events-auto absolute md:static md:w-auto w-[75%] max-w-[280px] transform-gpu ${prize.position === "2" || prize.position === "3" ? "md:mt-[60px]" : ""} ${prize.className}`}
                 style={{ willChange: "transform, opacity" }}
                 ref={(el) => {
                   if (el) cardsRef.current[index] = el;
@@ -269,13 +269,11 @@ const MissionRewards = () => {
                   altText={prize.altText}
                   containerHeight="auto"
                   containerWidth="100%"
-                  imageHeight="clamp(420px, 80vw, 500px)"
+                  imageHeight="clamp(320px, 55vh, 460px)"
                   imageWidth="100%"
                   bgcolor={prize.bgcolor}
                   rotateAmplitude={12}
                   scaleOnHover={1.05}
-                  showMobileWarning={false}
-                  showTooltip
                   displayOverlayContent
                   overlayContent={prize.overlayContent}
                   assetColors={prize.assetColors}

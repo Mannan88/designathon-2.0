@@ -12,8 +12,6 @@ interface TiltedCardProps {
   imageWidth?: React.CSSProperties["width"];
   scaleOnHover?: number;
   rotateAmplitude?: number;
-  showMobileWarning?: boolean;
-  showTooltip?: boolean;
   overlayContent?: React.ReactNode;
   displayOverlayContent?: boolean;
   bgcolor?: string;
@@ -99,14 +97,13 @@ export default function TiltedCard({
       style={{
         height: containerHeight,
         width: containerWidth,
-        marginTop: position === "2" || position === "3" ? "60px" : undefined,
       }}
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <motion.div
-        className="relative rounded-xl border border-amber-50 p-4 sm:p-5 perspective-midrange flex flex-col select-none"
+        className="relative rounded-xl border border-amber-50 p-3 sm:p-4 perspective-midrange flex flex-col select-none overflow-hidden"
         style={{
           width: imageWidth,
           height: imageHeight,
@@ -117,41 +114,43 @@ export default function TiltedCard({
         }}
         draggable={false}
       >
-        <TopImage fill={assetColors} />
+        <div className="shrink-0">
+          <TopImage fill={assetColors} />
+        </div>
 
-        <motion.div className="flex my-2 w-full justify-between items-center">
+        <motion.div className="flex flex-1 min-h-0 my-1 w-full justify-between items-center">
           <SideImage fill={assetColors} />
-          <div className="relative w-60 h-full flex items-center justify-center">
+          <div className="relative flex-1 h-full flex items-center justify-center overflow-hidden">
             <motion.img
               src={imageSrc}
               alt={altText}
-              className="w-full h-full"
+              className="w-full h-full object-contain"
               draggable={false}
             />
             <div
-              className="absolute text-[clamp(4rem,15vw,6rem)] sm:text-9xl font-bold drop-shadow-[5px_5px_0_rgba(0,0,0,0.25)]"
+              className="absolute text-[clamp(3.5rem,12vw,5.5rem)] sm:text-8xl font-bold drop-shadow-[5px_5px_0_rgba(0,0,0,0.25)]"
               style={{ color: textColor }}
             >
               {position}
-              <span className="text-[clamp(1.5rem,5vw,2.25rem)] sm:text-3xl">
+              <span className="text-[clamp(1.2rem,4vw,2rem)] sm:text-2xl">
                 {follower}
               </span>
             </div>
           </div>
         </motion.div>
 
-        <motion.div className="flex-1">
+        <div className="shrink-0 mt-1">
           {displayOverlayContent && overlayContent && (
-            <motion.div
+            <div
               style={{ backgroundColor: assetColors, color: textColor }}
-              className="z-10 border font-extrabold border-amber-50 shadow-lg px-4 py-3 sm:px-6 sm:py-4 h-full flex items-center justify-center rounded-xl overflow-hidden"
+              className="z-10 border font-extrabold border-amber-50 shadow-lg px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-center rounded-xl overflow-hidden"
             >
-              <motion.div className="text-5xl sm:text-7xl drop-shadow-[2px_2px_0_rgba(0,0,0,0.15)] leading-none text-center whitespace-nowrap">
+              <div className="text-4xl sm:text-5xl md:text-6xl drop-shadow-[2px_2px_0_rgba(0,0,0,0.15)] leading-none text-center whitespace-nowrap">
                 ₹{overlayContent}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           )}
-        </motion.div>
+        </div>
       </motion.div>
     </figure>
   );

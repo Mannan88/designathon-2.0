@@ -249,14 +249,14 @@ const MobileTimelineCard = ({
           </p>
         </div>
 
-        {/* galaxy image with overlaid stats */}
+        {/* galaxy image*/}
         <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-square my-3">
           <img
             src={event.galaxyImg}
             alt={event.title}
             loading="lazy"
             decoding="async"
-            className="mob-tl-galaxy absolute inset-0 w-full h-full object-contain pointer-events-none"
+            className="mob-tl-galaxy absolute inset-0 w-full h-full object-contain pointer-events-none opacity-60"
           />
 
           {/* stats overlays */}
@@ -310,7 +310,6 @@ const MobileTimelineCard = ({
   );
 };
 
-// venue section for mobile
 const MobileVenue = () => {
   const venueRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
@@ -434,7 +433,6 @@ const MobileVenue = () => {
   );
 };
 
-// progress line that spans the entire timeline
 const TimelineProgressLine = ({
   containerRef,
 }: {

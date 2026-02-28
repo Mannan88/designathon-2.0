@@ -1,12 +1,7 @@
 import { useEffect, useState, useRef } from "react";
+import { assets } from "@/lib/assets";
 
-const carouselImages = [
-  "https://res.cloudinary.com/dunayy41e/image/upload/w_600,f_auto,q_auto/v1772131687/img1_ouenae.jpg",
-  "https://res.cloudinary.com/dunayy41e/image/upload/w_600,f_auto,q_auto/v1772131687/img2_riugpx.jpg",
-  "https://res.cloudinary.com/dunayy41e/image/upload/w_600,f_auto,q_auto/v1772131687/img3_kunjn4.jpg",
-  "https://res.cloudinary.com/dunayy41e/image/upload/w_600,f_auto,q_auto/v1772131687/img4_lc8rex.jpg",
-  "https://res.cloudinary.com/dunayy41e/image/upload/w_600,f_auto,q_auto/v1772131687/img5_ops3de.jpg",
-];
+const carouselImages = assets.about.carousel;
 
 const Carousel = () => {
   const [currentImage, setCurrentImage] = useState(0);

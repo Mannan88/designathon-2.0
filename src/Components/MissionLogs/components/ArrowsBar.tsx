@@ -12,12 +12,21 @@ const ArrowsBar = () => {
       {/* arrow strip */}
       <div className="overflow-hidden border-2 border-white/80 p-1 lg:p-1.5 flex-1">
         <div className="flex items-center gap-0.5">
-          {Array.from({ length: 16 }).map((_, i) => (
+          {/* fewer arrows on mobile to prevent overflow */}
+          {Array.from({ length: 8 }).map((_, i) => (
             <img
-              key={i}
+              key={`mobile-${i}`}
               src={i % 2 === 0 ? ARROW_ASSETS.filled : ARROW_ASSETS.outline}
               alt=""
-              className="h-5 lg:h-10 w-auto shrink-0"
+              className="h-5 w-auto shrink-0 lg:hidden"
+            />
+          ))}
+          {Array.from({ length: 16 }).map((_, i) => (
+            <img
+              key={`desktop-${i}`}
+              src={i % 2 === 0 ? ARROW_ASSETS.filled : ARROW_ASSETS.outline}
+              alt=""
+              className="h-10 w-auto shrink-0 hidden lg:block"
             />
           ))}
         </div>

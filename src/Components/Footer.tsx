@@ -1,20 +1,15 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { PiGlobeSimple } from "react-icons/pi";
+import type { IconType } from "react-icons";
+import { links } from "@/lib/links";
+import { assets } from "@/lib/assets";
 
-const socialLinks = [
-  { Icon: FaTwitter, url: "https://twitter.com", label: "Twitter" },
-  { Icon: PiGlobeSimple, url: "https://www.gdgcace.in/", label: "Website" },
-  {
-    Icon: FaLinkedin,
-    url: "https://www.linkedin.com/company/google-developer-student-club-ace",
-    label: "LinkedIn",
-  },
-  {
-    Icon: FaInstagram,
-    url: "https://www.instagram.com/gdgc_ace",
-    label: "Instagram",
-  },
+const socialLinks: { Icon: IconType; url: string; label: string }[] = [
+  { Icon: FaTwitter, url: links.social.twitter, label: "Twitter" },
+  { Icon: PiGlobeSimple, url: links.social.website, label: "Website" },
+  { Icon: FaLinkedin, url: links.social.linkedin, label: "LinkedIn" },
+  { Icon: FaInstagram, url: links.social.instagram, label: "Instagram" },
 ];
 
 const Footer = memo(function Footer() {
@@ -30,19 +25,20 @@ const Footer = memo(function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-12">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
-          {/* left column — logo, description */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-4">
               <img
-                src="https://res.cloudinary.com/dunayy41e/image/upload/v1769463249/gdg-logo_lwjmhh.png"
+                src={assets.footer.gdgLogo}
                 alt="GDG Logo"
                 className="h-16 w-16 object-contain"
+                loading="lazy"
+                decoding="async"
               />
               <div>
                 <h3 className="text-foreground text-lg uppercase">
                   Google Developer Groups
                 </h3>
-                <p className="text-muted-foreground font-inter text-[12px] tracking-wider">
+                <p className="text-muted-foreground font-inter text-[10px] md:text-[12px] tracking-wider">
                   On Campus • Atharva College of Engineering
                 </p>
               </div>
@@ -55,7 +51,6 @@ const Footer = memo(function Footer() {
             </p>
           </div>
 
-          {/* right column — college map */}
           <div className="flex-1 min-w-0 md:max-w-md">
             <div className="border-border overflow-hidden rounded-xl border">
               <iframe

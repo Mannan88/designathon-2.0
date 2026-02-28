@@ -1,15 +1,18 @@
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import InteractiveSphere from "./InteractiveSphere";
+import { links } from "@/lib/links";
 
 const RegisterRing = () => {
   return (
-    <div className="w-full aspect-square max-w-[200px] self-center select-none relative">
-      {/* outer */}
+    <a
+      href={links.registration}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-full aspect-square max-w-[200px] self-center select-none relative"
+    >
       <div className="absolute inset-0 rounded-full border-[4px] border-white/70" />
-      {/* white band */}
       <div className="absolute inset-[4px] rounded-full bg-white" />
-      {/* inner */}
       <div className="absolute inset-[28px] rounded-full border-[2px] border-white/30" />
       <div className="absolute inset-[30px] rounded-full bg-[#141414]" />
 
@@ -39,9 +42,8 @@ const RegisterRing = () => {
         </svg>
       </motion.div>
 
-      {/* globe */}
-      <div className="absolute inset-[28px] flex items-center justify-center">
-        <div className="w-full h-full rounded-full cursor-pointer overflow-hidden">
+      <div className="absolute inset-[28px] flex items-center justify-center pointer-events-none">
+        <div className="w-full h-full rounded-full overflow-hidden">
           <Canvas
             camera={{ position: [0, 0, 3.2] }}
             style={{ pointerEvents: "auto" }}
@@ -52,7 +54,7 @@ const RegisterRing = () => {
           </Canvas>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
