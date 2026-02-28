@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { useLenis } from "@/lib/Lenis";
+import { useScrollEngine } from "@/lib/scroll-engine-context";
 import SocialIcons from "./HeroSection/SocialIcons";
 
 // register gsap plugins
@@ -9,11 +10,83 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(CustomEase);
 }
 
+const SCROLL_DIR_THRESHOLD = 5;
+const NAV_HIDE_OFFSET = 100;
+
 export default function NavigationMenu() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const scrollEngine = useScrollEngine();
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const lenis = useLenis();
+  const lastScrollY = useRef(0);
+  const navHidden = useRef(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  // scroll-direction-aware nav visibility
+  const updateNavVisibility = useCallback(() => {
+    if (isMenuOpen) return;
+
+    const currentY = window.scrollY || document.documentElement.scrollTop;
+    const delta = currentY - lastScrollY.current;
+
+    // always show at top of page
+    if (currentY < NAV_HIDE_OFFSET) {
+      if (navHidden.current) {
+        navHidden.current = false;
+        gsap.to(headerRef.current, {
+          yPercent: 0,
+          duration: 0.35,
+          ease: "power2.out",
+          overwrite: true,
+        });
+      }
+      lastScrollY.current = currentY;
+      return;
+    }
+
+    // scrolling down — hide nav
+    if (delta > SCROLL_DIR_THRESHOLD && !navHidden.current) {
+      navHidden.current = true;
+      gsap.to(headerRef.current, {
+        yPercent: -110,
+        duration: 0.35,
+        ease: "power2.in",
+        overwrite: true,
+      });
+    }
+
+    // scrolling up — show nav
+    if (delta < -SCROLL_DIR_THRESHOLD && navHidden.current) {
+      navHidden.current = false;
+      gsap.to(headerRef.current, {
+        yPercent: 0,
+        duration: 0.35,
+        ease: "power2.out",
+        overwrite: true,
+      });
+    }
+
+    lastScrollY.current = currentY;
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", updateNavVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", updateNavVisibility);
+  }, [updateNavVisibility]);
+
+  // force-show nav when menu is open
+  useEffect(() => {
+    if (isMenuOpen && navHidden.current) {
+      navHidden.current = false;
+      gsap.to(headerRef.current, {
+        yPercent: 0,
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: true,
+      });
+    }
+  }, [isMenuOpen]);
 
   // initial setup and hover effects
   useEffect(() => {
@@ -240,14 +313,19 @@ export default function NavigationMenu() {
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // smooth scroll to section
+  // smooth scroll to section via engine (bypasses scroll guards)
   const handleNavClick = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     setIsMenuOpen(false);
 
+    // strip leading # to get section id
+    const sectionId = id.startsWith("#") ? id.slice(1) : id;
+
     // delay scroll until close animation finishes
     setTimeout(() => {
-      if (lenis) {
+      if (scrollEngine) {
+        scrollEngine.navigateToSection(sectionId, 1.5);
+      } else if (lenis) {
         lenis.scrollTo(id, { duration: 1.5, lock: true });
       } else {
         document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
@@ -256,6 +334,7 @@ export default function NavigationMenu() {
   };
 
   const navItems = [
+    { id: "hero", label: "Home", shape: "3" },
     { id: "#mission-logs", label: "Mission Logs", shape: "2" },
     { id: "#rewards", label: "Rewards", shape: "3" },
     { id: "#timeline", label: "Timeline", shape: "4" },
@@ -266,7 +345,7 @@ export default function NavigationMenu() {
 
   return (
     <div ref={containerRef} className="kinetic-nav-root z-999">
-      <div className="site-header-wrapper">
+      <div ref={headerRef} className="site-header-wrapper">
         <header className="header">
           <div className="container is--full">
             <nav className="nav-row">

@@ -1,6 +1,7 @@
 import { Globe, Linkedin, Twitter, Instagram } from "lucide-react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { assets } from "@/lib/assets";
+import { links } from "@/lib/links";
 
 const SOCIAL_PLACEHOLDER =
   "https://res.cloudinary.com/dkysrpdi6/image/upload/v1767816590/Background_o5aaeh.png";
@@ -17,7 +18,7 @@ const socialItems = [
         className="text-neutral-400 group-hover:text-accent transition-colors duration-300"
       />
     ),
-    href: "#",
+    href: links.social.twitter,
   },
   {
     id: 2,
@@ -30,7 +31,7 @@ const socialItems = [
         className="text-neutral-400 group-hover:text-accent transition-colors duration-300"
       />
     ),
-    href: "#",
+    href: links.social.website,
   },
   {
     id: 3,
@@ -43,7 +44,7 @@ const socialItems = [
         className="text-neutral-400 group-hover:text-accent group-hover:fill-accent transition-colors duration-300"
       />
     ),
-    href: "#",
+    href: links.social.linkedin,
   },
   {
     id: 4,
@@ -56,11 +57,10 @@ const socialItems = [
         className="text-neutral-400 group-hover:text-accent transition-colors duration-300"
       />
     ),
-    href: "#",
+    href: links.social.instagram,
   },
 ];
 
-// inverted corner for social icons container
 const InvertedCorner = ({ className }: { className: string }) => (
   <svg
     className={`absolute w-8 h-8 text-white ${className}`}
@@ -82,6 +82,8 @@ const SocialIcons = ({ isMobileNav }: { isMobileNav?: boolean }) => {
           <a
             key={item.id}
             href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={item.name}
             className="text-white/70 hover:text-accent transition-colors"
           >

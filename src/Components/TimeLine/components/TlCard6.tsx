@@ -41,7 +41,7 @@ const TlCard6 = forwardRef<TlCardHandle>((_props, ref) => {
             alt="galaxy"
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 m-auto z-0 h-100 w-100 object-contain pointer-events-none"
+            className="absolute inset-0 m-auto z-0 h-100 w-100 object-contain pointer-events-none rounded-full"
           />
           <div className="z-10 flex flex-col justify-center items-center gap-24 col-span-1">
             <div className="flex">

@@ -14,6 +14,12 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["8ea3-150-242-24-157.ngrok-free.app"],
+    allowedHosts: ["cb4c-150-242-24-158.ngrok-free.app"],
+  },
+  build: {
+    target: "es2022",
+    cssMinify: true,
+    assetsInlineLimit: 4096,
+    chunkSizeWarningLimit: 600,
   },
 });

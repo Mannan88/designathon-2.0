@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Center } from "@react-three/drei";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Group } from "three";
 
 const scrollState = { velocity: 0 };
@@ -46,21 +46,38 @@ function Model() {
 }
 
 const GalaxyModel = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "200px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       className="h-full absolute inset-0 pointer-events-none"
-      style={{ willChange: "transform" }}
     >
-      <Canvas
-        camera={{ position: [0, 1, 3] }}
-        dpr={[1, 1.5]}
-        frameloop="always"
-        style={{ pointerEvents: "none" }}
-      >
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[5, 5, 5]} />
-        <Model />
-      </Canvas>
+      {isVisible && (
+        <Canvas
+          camera={{ position: [0, 1, 3] }}
+          dpr={[1, 1.5]}
+          frameloop="always"
+          style={{ pointerEvents: "none" }}
+        >
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[5, 5, 5]} />
+          <Model />
+        </Canvas>
+      )}
     </div>
   );
 };

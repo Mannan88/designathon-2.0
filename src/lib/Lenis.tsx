@@ -1,11 +1,18 @@
-import { useEffect, useRef, memo, createContext, useContext, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  memo,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import Lenis from "lenis";
 
 const LenisContext = createContext<Lenis | null>(null);
 
 export const useLenis = () => useContext(LenisContext);
 
-const LenisProvider = memo(function ClientLayout({
+const LenisProvider = memo(function LenisProvider({
   children,
 }: {
   children: React.ReactNode;

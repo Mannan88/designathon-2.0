@@ -2,9 +2,9 @@ import { assets } from "@/lib/assets";
 
 const RightColumn = () => {
   return (
-    <div className="flex flex-col gap-4 w-full lg:w-1/4">
+    <div className="flex flex-col gap-2 w-full lg:w-1/4">
       <div
-        className="h-64 backdrop-blur-md p-6 border border-white/20 flex flex-col justify-start pt-8 overflow-hidden"
+        className="flex-1 backdrop-blur-md p-5 border border-white/20 flex flex-col justify-start pt-6 overflow-hidden relative"
         style={{
           backgroundImage: `url('${assets.guidelines.galaxyImage}')`,
           backgroundSize: "450% 300%",
@@ -14,13 +14,13 @@ const RightColumn = () => {
         <div className="absolute inset-0 bg-orange-700/30 mix-blend-overlay" />
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-3">
             <div className="w-3 h-3 bg-orange-500" />
-            <h3 className="text-white text-xl font-bold tracking-wider">
+            <h3 className="text-white text-sm lg:text-xl xl:text-2xl font-bold tracking-wider">
               Guideline 3
             </h3>
           </div>
-          <div className="space-y-1 text-white/70 text-sm tracking-wide">
+          <div className="space-y-1 text-white/70 text-xs lg:text-sm tracking-wide">
             <p>yap yap yap</p>
             <p>yap yap yap</p>
             <p>yap yap yap</p>
@@ -29,15 +29,15 @@ const RightColumn = () => {
         </div>
       </div>
 
-      <div className="h-64 backdrop-blur-md p-6 border border-white/20 flex flex-col justify-start pt-8 overflow-hidden">
+      <div className="flex-1 backdrop-blur-md p-5 border border-white/20 flex flex-col justify-start pt-6 overflow-hidden">
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-3">
             <div className="w-3 h-3 bg-orange-500" />
-            <h3 className="text-white text-xl font-bold tracking-wider">
+            <h3 className="text-white text-sm lg:text-xl xl:text-2xl font-bold tracking-wider">
               Guideline 4
             </h3>
           </div>
-          <div className="space-y-1 text-white/70 text-sm tracking-wide">
+          <div className="space-y-1 text-white/70 text-xs lg:text-sm tracking-wide">
             <p>yap yap yap</p>
             <p>yap yap yap</p>
             <p>yap yap yap</p>

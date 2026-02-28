@@ -1,17 +1,16 @@
 import { RetroGrid } from "../retro-grid";
-import NavigationMenu from "../navigationMenu";
 import CountUp from "../CountUp";
 import ShinyText from "../ShinyText";
 import DecryptedText from "../DecryptedText";
 import FloatingObject from "./Floating";
 import { assets } from "@/lib/assets";
+import { links } from "@/lib/links";
 import SocialIcons from "./SocialIcons";
 import { useCountdown } from "./hooks/useCountdown";
 import { useParallax } from "./hooks/useParallax";
 import Timer from "./components/Timer";
 import GdgIcon from "./components/GdgIcon";
 
-// inverted corner svg used in prize section
 const InvertedCornerSVG = ({
   className,
   path,
@@ -41,9 +40,9 @@ const HeroSection = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative h-screen min-h-screen w-full bg-white p-1 md:p-3 overflow-hidden flex flex-col"
+      className="relative h-dvh max-h-screen w-full bg-white p-1 md:p-3 overflow-hidden flex flex-col"
     >
-      <div className="relative flex-1 w-full bg-neutral-900 rounded-[2.5rem] overflow-hidden flex flex-col items-center justify-center text-foreground font-sans">
+      <div className="relative flex-1 min-h-0 w-full bg-neutral-900 rounded-[2.5rem] overflow-hidden flex flex-col items-center justify-center text-foreground font-sans">
         <RetroGrid
           className="absolute inset-0 z-0 h-full w-full opacity-60 pointer-events-none"
           angle={65}
@@ -54,7 +53,7 @@ const HeroSection = () => {
 
         {/* gdgc logo */}
         <GdgIcon />
-        <div className="absolute md:-top-2.5 -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+        <div className="absolute md:-top-2.5 -top-0.5  left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
           <img
             src={assets.hero.gdgLogo}
             alt="GDG Logo"
@@ -63,8 +62,6 @@ const HeroSection = () => {
             draggable={false}
           />
         </div>
-
-        <NavigationMenu />
 
         {/* gdg text below logo */}
         <div className="absolute top-16 md:top-18 left-1/2 -translate-x-1/2 z-15 flex flex-col items-center space-y-0.5">
@@ -171,7 +168,7 @@ const HeroSection = () => {
         />
 
         {/* astronaut with amplified parallax */}
-        <div className="absolute z-7 pointer-events-none left-1/2 -translate-x-1/2 top-[32%] md:top-[20%] w-78 h-78 md:w-100 md:h-100 lg:w-128 lg:h-128">
+        <div className="absolute z-7 pointer-events-none left-1/2 -translate-x-1/2 top-[32%] md:top-[20%] w-[min(19.5rem,45vh)] h-[min(19.5rem,45vh)] md:w-[min(25rem,50vh)] md:h-[min(25rem,50vh)] lg:w-128 lg:h-128">
           <div className="animate-float-3">
             <div
               className="will-change-transform backface-hidden"
@@ -183,7 +180,7 @@ const HeroSection = () => {
               <img
                 src={assets.hero.astronaut}
                 alt="Astronaut floating in space"
-                className="w-78 h-78 md:w-100 md:h-100 lg:w-128 lg:h-128 object-contain select-none"
+                className="w-full h-full object-contain select-none"
                 decoding="async"
                 style={{
                   filter: "drop-shadow(0 0 50px rgba(0,0,0,0.5))",
@@ -201,7 +198,7 @@ const HeroSection = () => {
         >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] -z-10 bg-[radial-gradient(closest-side,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_100%)] blur-2xl pointer-events-none" />
 
-          <div className="rounded-xl p-2 px-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <div className="rounded-xl p-1.5 md:p-2 px-3 md:px-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             <ShinyText
               text="D E S I G N A T H O N"
               speed={2}
@@ -213,7 +210,7 @@ const HeroSection = () => {
           </div>
 
           <div className="w-full flex justify-center">
-            <h1 className="text-4xl spacebound-title md:text-2xl lg:text-7xl font-bold tracking-tighter text-white leading-tight">
+            <h1 className="text-[clamp(2rem,8vw,4rem)] spacebound-title lg:text-7xl font-bold tracking-tighter text-white leading-tight">
               SPACEBOUND
             </h1>
           </div>
@@ -236,10 +233,9 @@ const HeroSection = () => {
         </div>
 
         <SocialIcons />
-        <div className="h-30 md:hidden z-99 w-full bg-white absolute bottom-0 right-0"></div>
 
         {/* prize pool + join now */}
-        <div className="absolute bottom-30 md:bottom-0  right-0 z-20 lg:bottom-0 lg:drop-shadow-2xl">
+        <div className="absolute bottom-0 md:bottom-0 right-0 z-20 lg:bottom-0 lg:drop-shadow-2xl">
           <div className="relative bg-white rounded-tl-4xl p-2 flex flex-row items-center">
             <InvertedCornerSVG
               className="absolute -top-[31.5px] right-[-1px] w-8 h-8 text-white"
@@ -250,23 +246,28 @@ const HeroSection = () => {
               path="M32 32V0C32 17.67 17.67 32 0 32z"
             />
 
-            <div className="pl-6 md:pl-8 pr-4 md:pr-6 py-3 md:py-4 flex flex-col items-center min-w-28 md:min-w-36">
+            <div className="pl-5 md:pl-8 pr-3 md:pr-6 py-2.5 md:py-4 flex flex-col items-center min-w-24 md:min-w-36">
               <div className="flex items-baseline leading-none">
-                <span className="text-5xl md:text-6xl font-bold text-black tracking-tighter">
+                <span className="text-4xl md:text-6xl font-bold text-black tracking-tighter">
                   <CountUp to={60} from={0} duration={1.5} separator="" />
                 </span>
-                <span className="text-2xl md:text-3xl ml-1 font-bold text-black">
+                <span className="text-xl md:text-3xl ml-1 font-bold text-black">
                   k
                 </span>
               </div>
-              <span className="text-[10px] md:text-[13px] uppercase tracking-[0.2em] text-neutral-500 font-bold">
+              <span className="text-[9px] md:text-[13px] uppercase tracking-[0.15em] text-neutral-500 font-bold">
                 prize pool
               </span>
             </div>
 
-            <button className="bg-accent text-white font-bold py-4 px-6 md:py-5 md:px-8 rounded-2xl uppercase tracking-widest text-xs md:text-lg border-2 border-black/5 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 active:shadow-none active:translate-x-1 active:translate-y-1 focus-visible:animate-pulse transition-all duration-150 ease-out">
+            <a
+              href={links.registration}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-accent text-white font-bold py-3 px-5 md:py-5 md:px-8 rounded-2xl uppercase tracking-widest text-xs md:text-lg border-2 border-black/5 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 active:shadow-none active:translate-x-1 active:translate-y-1 focus-visible:animate-pulse transition-all duration-150 ease-out inline-block"
+            >
               Join Now
-            </button>
+            </a>
           </div>
         </div>
       </div>
