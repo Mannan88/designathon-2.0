@@ -9,7 +9,7 @@ const RegisterRing = () => {
       href={links.registration}
       target="_blank"
       rel="noopener noreferrer"
-      className="block w-full aspect-square max-w-[200px] self-center select-none relative"
+      className="block w-full aspect-square  self-center select-none relative"
     >
       <div className="absolute inset-0 rounded-full border-[4px] border-white/70" />
       <div className="absolute inset-[4px] rounded-full bg-white" />

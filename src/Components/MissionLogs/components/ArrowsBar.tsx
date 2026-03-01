@@ -8,9 +8,9 @@ const ARROW_ASSETS = {
 // scrolling arrows with globe icon
 const ArrowsBar = () => {
   return (
-    <div className="fixed lg:absolute bottom-6 left-4 lg:bottom-12 lg:left-auto lg:right-72 flex items-center gap-1 z-20 max-w-[50vw] lg:max-w-none">
+    <div className=" lg:absolute bottom-4 left-4 lg:bottom-8 lg:left-auto lg:right-72 flex items-center gap-1 z-20 max-w-[50vw] lg:max-w-none">
       {/* arrow strip */}
-      <div className="overflow-hidden border-2 border-white/80 p-1 lg:p-1.5 flex-1">
+      <div className="overflow-hidden border-2 border-white p-1 lg:p-1.5 flex-1">
         <div className="flex items-center gap-0.5">
           {/* fewer arrows on mobile to prevent overflow */}
           {Array.from({ length: 8 }).map((_, i) => (

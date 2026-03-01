@@ -33,7 +33,7 @@ export default function MouseWave({
   });
 
   return (
-    <mesh ref={plane} position={[0, 0, 0]}>
+    <mesh ref={plane} position={[0, 0, 0]} >
       <planeGeometry args={[canvasWidth, canvasHeight, 45, 45]} />
       <shaderMaterial
         side={THREE.DoubleSide}

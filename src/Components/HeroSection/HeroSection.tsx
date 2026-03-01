@@ -34,7 +34,7 @@ const HeroSection = () => {
       <FloatingObject
         src={assets.hero.bolt}
         alt="Bolt"
-        wrapperClassName="-bottom-4 left-[46%] sm:-bottom-8 sm:left-[48%] animate-float-3 [animation-delay:1s] z-100"
+        wrapperClassName="-bottom-4 left-[46%] sm:-bottom-8 sm:left-[48%] animate-float-3 [animation-delay:1s] sm:z-100 z-0"
         innerClassName="w-24 h-24 sm:w-40 sm:h-40 md:h-48 md:w-48 rotate-[40deg]"
         parallaxFactor={0.5}
         mouseOffset={mouseOffset}
@@ -63,6 +63,8 @@ const HeroSection = () => {
             draggable={false}
           />
         </div>
+
+        <NavigationMenu />
 
         {/* gdg text below logo */}
         <div className="absolute text-center top-16 sm:top-18 left-1/2 -translate-x-1/2 z-15 flex flex-col items-center space-y-0.5">
@@ -192,7 +194,7 @@ const HeroSection = () => {
         >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] -z-10 bg-[radial-gradient(closest-side,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_100%)] blur-2xl pointer-events-none" />
 
-          <div className="rounded-xl p-1.5 md:p-2 px-3 md:px-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <div className="rounded-xl p-2 px-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             <ShinyText
               text="D E S I G N A T H O N"
               speed={2}
@@ -204,7 +206,7 @@ const HeroSection = () => {
           </div>
 
           <div className="w-full flex justify-center">
-            <h1 className="text-[clamp(2rem,8vw,4rem)] spacebound-title lg:text-7xl font-bold tracking-tighter text-white leading-tight">
+            <h1 className="text-4xl spacebound-title md:text-2xl lg:text-7xl font-bold tracking-tighter text-white leading-tight">
               SPACEBOUND
             </h1>
           </div>
@@ -251,7 +253,7 @@ const HeroSection = () => {
 
             <button className="bg-accent text-white font-bold py-2 mr-4 sm:mr-0 px-3 sm:py-4 md:py-5 sm:px-5 md:px-8 md:rounded-2xl rounded-lg uppercase tracking-widest text-sm md:text-lg border-2 border-black/5 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 active:shadow-none active:translate-x-1 active:translate-y-1 focus-visible:animate-pulse transition-all duration-150 ease-out">
               Join Now
-            </a>
+            </button>
           </div>
         </div>
       </div>
