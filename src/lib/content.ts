@@ -20,6 +20,21 @@ export const faqContent = [
     question: "HOW MANY MEMBERS CAN BE IN A TEAM?",
     answer: "Each team must consist of minimum 2 and maximum 3 members.",
   },
+  {
+    question: "CAN WE USE AI TOOLS?",
+    answer:
+      "You may use AI for generating images or text content, but AI-generated UI layouts and wireframes (Uizard, Galileo AI, etc.) are strictly banned.",
+  },
+  {
+    question: "IS IT ONLINE OR OFFLINE?",
+    answer:
+      "Round 1 is online (16–17 March). The Grand Finale on 23 March is offline at Atharva College of Engineering, Mumbai.",
+  },
+  {
+    question: "WHAT SHOULD WE SUBMIT?",
+    answer:
+      "A complete design prototype with all screens, interactions, and a brief presentation explaining your design decisions and user flow.",
+  },
 ];
 
 export const guidelineContent = [

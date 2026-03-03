@@ -36,7 +36,7 @@ function App() {
   const lenis = useLenis();
   const engineRef = useRef<ScrollEngine | null>(null);
 
-  // single global resize handler — recalculates all pin spacers
+  // recalculates all pin spacers on resize
   useEffect(() => {
     if (isLoading) return;
     let timer: ReturnType<typeof setTimeout> | null = null;
@@ -117,7 +117,11 @@ function App() {
           <HeroSection />
         </div>
 
-        <div className="relative" id="mission-logs-wrapper">
+        <div
+          className="relative"
+          id="mission-logs-wrapper"
+          style={{ zIndex: 50 }}
+        >
           <div
             id="mission-logs"
             className="sticky top-0 z-10 mission-logs-sticky"
@@ -128,8 +132,8 @@ function App() {
           <Suspense fallback={<div className="min-h-screen bg-black" />}>
             <div
               id="rewards"
-              className="relative"
-              style={{ zIndex: 20, isolation: "isolate" }}
+              className="relative bg-black"
+              style={{ zIndex: 20 }}
             >
               <MissionRewards />
             </div>
@@ -140,7 +144,7 @@ function App() {
           <div
             id="timeline"
             className="relative bg-background"
-            style={{ zIndex: 30, isolation: "isolate" }}
+            style={{ zIndex: 20, isolation: "isolate" }}
           >
             <TimeLine />
           </div>
@@ -149,22 +153,22 @@ function App() {
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <div
             id="guidelines"
-            className="relative"
-            style={{ zIndex: 30, isolation: "isolate" }}
+            className="relative bg-background"
+            style={{ zIndex: 15, isolation: "isolate" }}
           >
             <MissionGuidelines />
           </div>
           <div
             id="faqs"
-            className="relative"
-            style={{ zIndex: 30, isolation: "isolate" }}
+            className="relative bg-background"
+            style={{ zIndex: 15, isolation: "isolate" }}
           >
             <Faqs />
           </div>
           <div
             id="about"
             className="relative bg-background"
-            style={{ zIndex: 30, isolation: "isolate" }}
+            style={{ zIndex: 15, isolation: "isolate" }}
           >
             <About />
           </div>
@@ -173,7 +177,7 @@ function App() {
         <div
           id="ribbon-section"
           className="relative overflow-hidden py-6 sm:py-10 bg-background"
-          style={{ zIndex: 30, isolation: "isolate" }}
+          style={{ zIndex: 15, isolation: "isolate" }}
         >
           <InfiniteRibbon
             rotation={3}

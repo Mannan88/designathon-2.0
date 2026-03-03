@@ -104,8 +104,8 @@ const Faqs = () => {
             <FlippingCard
               variant="white"
               className="!rounded-tl-none rounded-b-4xl shadow-none"
-              frontContent={<CardFront text={faqContent[1].question} />}
-              backContent={<CardBack text={faqContent[1].answer} />}
+              frontContent={<CardFront text={faqContent[4].question} />}
+              backContent={<CardBack text={faqContent[4].answer} />}
             />
           </div>
 
@@ -177,8 +177,8 @@ const Faqs = () => {
               <FlippingCard
                 variant="white"
                 className="!rounded-bl-none shadow-none"
-                frontContent={<CardFront text={faqContent[2].question} />}
-                backContent={<CardBack text={faqContent[2].answer} />}
+                frontContent={<CardFront text={faqContent[5].question} />}
+                backContent={<CardBack text={faqContent[5].answer} />}
               />
             </div>
 
@@ -186,8 +186,8 @@ const Faqs = () => {
               <FlippingCard
                 variant="white"
                 className="!rounded-tr-none shadow-none"
-                frontContent={<CardFront text={faqContent[3].question} />}
-                backContent={<CardBack text={faqContent[3].answer} />}
+                frontContent={<CardFront text={faqContent[6].question} />}
+                backContent={<CardBack text={faqContent[6].answer} />}
               />
             </div>
             <InvertedCorner

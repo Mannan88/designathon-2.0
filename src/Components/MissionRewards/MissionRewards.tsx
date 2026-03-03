@@ -229,10 +229,14 @@ const MissionRewards = () => {
   ];
 
   return (
-    <div ref={sectionRef} className="relative w-full min-h-screen select-none">
+    <div
+      ref={sectionRef}
+      className="relative w-full min-h-screen select-none bg-black overflow-hidden"
+      style={{ zIndex: 2 }}
+    >
       <div
         ref={contentRef}
-        className="relative w-full min-h-screen bg-[#000000] overflow-hidden"
+        className="relative w-full min-h-screen bg-black overflow-hidden"
         style={{ transformOrigin: "center top", willChange: "transform" }}
       >
         <GalaxyModel />

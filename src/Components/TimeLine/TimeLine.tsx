@@ -36,7 +36,6 @@ const TimeLine = () => {
     setShowMobile(window.innerWidth < DESKTOP_BREAKPOINT);
   }, []);
 
-  // listen for resize to toggle mobile/desktop
   useEffect(() => {
     window.addEventListener("resize", checkBreakpoint);
     window.addEventListener("orientationchange", checkBreakpoint);
@@ -46,7 +45,6 @@ const TimeLine = () => {
     };
   }, [checkBreakpoint]);
 
-  // all gsap animations — matchMedia handles breakpoint switching internally
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -133,7 +131,7 @@ const TimeLine = () => {
         });
       });
 
-      // collapse desktop DOM when on mobile so it takes zero space
+      // collapse desktop DOM on mobile so it takes zero space
       mm.add(`(max-width: ${DESKTOP_BREAKPOINT - 1}px)`, () => {
         if (desktopWrapperRef.current) {
           gsap.set(desktopWrapperRef.current, {
@@ -152,7 +150,7 @@ const TimeLine = () => {
 
   return (
     <section ref={containerRef} className="bg-background overflow-x-clip">
-      {/* desktop horizontal timeline — always in DOM for pin-spacer stability */}
+      {/* desktop horizontal timeline */}
       <div
         ref={desktopWrapperRef}
         style={
@@ -161,7 +159,12 @@ const TimeLine = () => {
             : undefined
         }
       >
-        <div ref={triggerRef}>
+        {/*
+          triggerRef is what GSAP pins. overflow-hidden clips the 520vw
+          wide content so it doesn't bleed out before/after the pin.
+          bg-background ensures a solid backdrop when pinned.
+        */}
+        <div ref={triggerRef} className="bg-background overflow-hidden">
           <div
             ref={sectionRef}
             className="h-screen w-[520vw] flex flex-row relative"
@@ -202,7 +205,7 @@ const TimeLine = () => {
         </div>
       </div>
 
-      {/* mobile vertical timeline — conditionally rendered since it has no pin */}
+      {/* mobile vertical timeline — only rendered on mobile */}
       {showMobile && <MobileTimeline />}
     </section>
   );
