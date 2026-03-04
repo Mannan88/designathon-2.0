@@ -145,8 +145,10 @@ export default function TiltedCard({
               style={{ backgroundColor: assetColors, color: textColor }}
               className="z-10 border font-extrabold border-amber-50 shadow-lg px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-center rounded-xl overflow-hidden"
             >
-              <div className="text-4xl sm:text-5xl md:text-6xl drop-shadow-[2px_2px_0_rgba(0,0,0,0.15)] leading-none text-center whitespace-nowrap">
-                ₹{overlayContent}
+              <div className="text-4xl sm:text-5xl md:text-6xl drop-shadow-[2px_2px_0_rgba(0,0,0,0.15)] leading-[0.8em] text-center whitespace-nowrap">
+                {overlayContent}<br/>
+                <span className="text-4xl">Solar Credits</span>
+                
               </div>
             </div>
           )}

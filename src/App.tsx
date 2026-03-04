@@ -68,7 +68,7 @@ function App() {
 
     const ctx = gsap.context(() => {
       gsap.to(missionLogs, {
-        scale: 0.92,
+        scale: 1,
         opacity: 0.4,
         filter: "blur(1px)",
         force3D: true,

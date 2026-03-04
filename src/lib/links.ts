@@ -1,6 +1,6 @@
 export const links = {
   social: {
-    twitter: "https://x.com/gdgc_ace",
+    github: "https://github.com/gdgc-ace/",
     website: "https://www.gdgcace.in/",
     linkedin:
       "https://www.linkedin.com/company/google-developer-student-club-ace",

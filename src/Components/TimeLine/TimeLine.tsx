@@ -120,8 +120,8 @@ const TimeLine = () => {
                 scrollTrigger: {
                   trigger: ref.current.element,
                   containerAnimation: horizontalScrollTl,
-                  start: "top 60%",
-                  end: "bottom+=200 60%",
+                  start: "top 65%",
+                  end: "bottom+=200 80%",
                   scrub: true,
                   invalidateOnRefresh: true,
                 },
@@ -149,7 +149,8 @@ const TimeLine = () => {
   );
 
   return (
-    <section ref={containerRef} className="bg-background overflow-x-clip">
+    <section ref={containerRef} className="bg-background overflow-x-clip relative">
+       <h1 className="text-4xl absolute top-10 left-8  text-primary"> EVENT <span className="text-white">TIMELINE</span> </h1>
       {/* desktop horizontal timeline */}
       <div
         ref={desktopWrapperRef}
@@ -168,7 +169,7 @@ const TimeLine = () => {
           <div
             ref={sectionRef}
             className="h-screen w-[520vw] flex flex-row relative"
-          >
+          > <h1 className="text-6xl absolute top-8 left-8  text-primary"> EVENT <span className="text-white">TIMELINE</span> </h1>
             <img
               src={assets.timeline.path}
               alt="timeline path"
@@ -184,16 +185,16 @@ const TimeLine = () => {
                 <div className="h-full w-[68vw]">
                   <TlCard2 ref={cardTwoRef} />
                 </div>
-                <div className="h-full w-[68vw]">
+                <div className="h-full w-[64vw]">
                   <TlCard3 ref={cardThreeRef} />
                 </div>
-                <div className="h-full w-[66vw]">
+                <div className="h-full w-[70vw]">
                   <TlCard4 ref={cardFourRef} />
                 </div>
-                <div className="h-full w-[72vw]">
+                <div className="h-full w-[68vw]">
                   <TlCard5 ref={cardFiveRef} />
                 </div>
-                <div className="h-full w-[64vw]">
+                <div className="h-full w-[66vw]">
                   <TlCard6 ref={cardSixRef} />
                 </div>
                 <div className="h-full w-[50vw] z-10">

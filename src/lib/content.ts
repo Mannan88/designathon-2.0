@@ -18,7 +18,7 @@ export const faqContent = [
   },
   {
     question: "HOW MANY MEMBERS CAN BE IN A TEAM?",
-    answer: "Each team must consist of minimum 2 and maximum 3 members.",
+    answer: "Each team must consist of minimum 2 and maximum 4 members.",
   },
   {
     question: "CAN WE USE AI TOOLS?",

@@ -14,15 +14,6 @@ const MissionLogs = () => {
         MISSION <span className="text-white">LOGS</span>
       </h1>
 
-      {/* galaxy underlay */}
-      <div className="absolute top-1/2 mt-12 md:mt-0 left-1/2 -translate-x-1/2 -translate-y-[55%] z-[4] opacity-40 mix-blend-screen pointer-events-none">
-        <OptimizedImage
-          src={assets.missionLogs.milkyway}
-          alt="Galaxy"
-          eager
-          className="w-[40vw] md:w-[30vw] max-w-[400px] object-contain"
-        />
-      </div>
 
       <ArrowsBar />
 
@@ -34,17 +25,17 @@ const MissionLogs = () => {
               {/* about theme card */}
               <div className="w-full filter drop-shadow-[0_10px_20px_rgba(242,124,6,0.15)] z-20">
                 <div
-                  className="bg-primary px-3 lg:px-6 min-h-20 lg:min-h-36 w-full lg:w-88 flex flex-col py-2 lg:py-5 gap-1 lg:gap-3 h-full"
+                  className="bg-primary px-3 lg:px-4 min-h-20 lg:min-h-36 w-full lg:w-92 flex flex-col py-2 lg:py-5 gap-1 lg:gap-3 h-full"
                   style={{
                     clipPath:
                       "polygon(0% 0%, 65% 0%, 75% 25%, 100% 25%, 100% 100%, 0% 100%)",
-                    borderRadius: "0 0 1rem 1rem",
+                    borderRadius: "1rem 0 1rem 1rem",
                   }}
                 >
                   <h2 className="text-lg lg:text-3xl font-bold leading-none uppercase font-share-tech text-[#141414]">
                     About theme
                   </h2>
-                  <p className="text-[10px] lg:text-sm font-inter leading-tight font-medium text-orange-200">
+                  <p className="text-[10px] text-justify lg:text-[16px] font-inter leading-tight font-medium text-orange-200">
                     Spacebound symbolizes ambition without limits. Your space
                     crew is sent to explore and push beyond the limits of
                     design.
@@ -54,7 +45,7 @@ const MissionLogs = () => {
 
               {/* description box (mobile) */}
               <div className="z-20 lg:hidden mt-1 pointer-events-auto">
-                <div className="bg-foreground text-orange-950 p-2.5 pt-2.5 pb-3 rounded-lg rounded-tr-none border border-white/10 shadow-2xl relative w-full flex flex-col justify-center">
+                <div className="bg-foreground text-orange-950 p-2.5 text-justify pt-2.5 pb-3 rounded-lg border-white/10 shadow-2xl relative w-full flex flex-col justify-center">
                   <p className="text-[9px] sm:text-[11px] md:text-sm font-medium leading-relaxed font-inter">
                     <strong className="text-accent block mb-0.5">
                       Designathon 2.0: Spacebound
@@ -65,7 +56,7 @@ const MissionLogs = () => {
                   </p>
                 </div>
 
-                <div className="text-accent font-mono text-[9px] flex items-center gap-1 whitespace-nowrap mt-0.5">
+                <div className="hidden lg:flex text-accent font-mono text-[9px] flex items-center gap-1 whitespace-nowrap mt-0.5">
                   <span className="w-1.5 h-1.5 bg-accent inline-block rounded-sm" />{" "}
                   151.46M km
                 </div>
@@ -74,6 +65,8 @@ const MissionLogs = () => {
 
             {/* drill video (mobile) */}
             <div className="w-[30%] max-w-[120px] aspect-[1/2] lg:hidden border border-primary/30 rounded-lg overflow-hidden backdrop-blur-sm z-20 flex-shrink-0 relative pointer-events-auto bg-black">
+               <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-primary/60 z-10" />
+                <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-primary/60 z-10" />
               <video
                 src={assets.missionLogs.drill}
                 autoPlay
@@ -99,10 +92,10 @@ const MissionLogs = () => {
           </div>
 
           {/* sponge card (desktop) */}
-          <div className="hidden lg:flex items-start gap-4">
-            <div className="w-48 lg:w-56 xl:w-64 aspect-square border border-primary/30 rounded-lg overflow-hidden relative bg-black/20 backdrop-blur-sm">
-              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-primary/60 z-10" />
-              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-primary/60 z-10" />
+          <div className="hidden lg:flex items-start gap-4 w-48 lg:w-62 xl:w-64 aspect-square">
+            <div className=" border border-primary/50 rounded-lg overflow-hidden relative hover:border-primary bg-black/20 backdrop-blur-sm group">
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-primary/60 z-10 group-hover:top-4 group-hover:left-4 group-hover:border-primary transition-all ease-in-out duration-300" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-primary/60 z-10 group-hover:right-4 group-hover:bottom-4 group-hover:border-primary transition-all ease-in-out duration-300" />
               <video
                 src={assets.missionLogs.sponge}
                 autoPlay
@@ -119,8 +112,8 @@ const MissionLogs = () => {
 
           {/* description box (desktop) */}
           <div className="hidden lg:block w-full lg:w-[calc(100%+22rem)] relative mt-4 lg:mt-0 pointer-events-auto">
-            <div className="bg-foreground text-orange-950 p-4 lg:p-5 rounded-lg rounded-tr-none border border-white/10 shadow-2xl relative">
-              <p className="text-xs lg:text-sm font-medium leading-relaxed font-inter">
+            <div className="bg-foreground text-orange-950 p-4 lg:p-5 rounded-2xl border border-white/10 shadow-2xl relative">
+              <p className="text-xs lg:text-[16px] font-medium leading-relaxed font-inter">
                 <strong className="text-accent">
                   Designathon 2.0: Spacebound
                 </strong>{" "}
@@ -135,19 +128,42 @@ const MissionLogs = () => {
         </div>
 
         {/* center mesh */}
-        <div className="absolute inset-0 lg:static flex flex-col items-center justify-center w-full z-[5] pointer-events-none overflow-hidden">
-          <div className="w-[90vw] mt-10 md:mt-0 sm:w-[75vw] lg:w-[40vw] max-w-[650px] perspective-[1000px] absolute top-[50%] lg:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto animate-pulse lg:animate-none">
-            <div className="w-full h-full transform-style-3d rotate-x-[15deg]">
+        <div className="absolute inset-0 lg:static flex flex-col items-center justify-center w-full z-5 pointer-events-none overflow-hidden">
+          <div className="w-[90vw] mt-10 md:mt-0 sm:w-[75vw] lg:w-200 max-w-[700px] perspective-[1000px] absolute top-[50%] lg:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto lg:animate-none">
+            <div className="w-full h-full transform-style-3d rotate-x-12">
               <MouseWaveScene imageSrc={assets.missionLogs.mesh} />
             </div>
           </div>
+          <div className="absolute top-1/2 mt-12 md:mt-0 left-1/2 -translate-x-1/2 -translate-y-[55%] z-100  pointer-events-none">
+         
+            <OptimizedImage
+              src={assets.missionLogs.milkyway}
+              alt="Galaxy"
+              eager
+              className="w-48 md:w-72 object-contain"
+            />
+          </div>
+            <div className="relative w-140 h-40 ">
+          <div className="hidden lg:flex justify-between absolute top-0 left-0 items-start pointer-events-auto mt-0 ">
+            <div className="text-accent font-mono text-[10px] lg:text-xs tracking-[0.2em flex items-center gap-2 z-20">
+              New BigBang detected !!{" "}
+              <span className="w-6 h-6 border-2 border-accent" />
+            </div>
+          </div>
+          <div className="hidden lg:flex justify-between absolute -top-8 right-8 items-start pointer-events-auto mt-0 ">
+            <div className="text-accent/80 font-mono text-[10px] lg:text-xs tracking-[0.2em flex items-center gap-2 z-20 ">
+              High Creativity alert!!
+            </div>
+          </div>
+        </div>
+
         </div>
 
         {/* right column (desktop) / bottom section (mobile) */}
         <div className="flex flex-col p-3 px-5 lg:p-5 lg:pt-8 gap-3 lg:gap-3 z-20 pointer-events-none lg:pointer-events-auto mb-[60px] lg:mb-0 relative min-h-[140px] flex-shrink">
           <div className="flex justify-between items-end gap-2 pointer-events-auto lg:hidden h-full pb-3">
             {/* sponge card (mobile) */}
-            <div className="w-[45%] z-20 h-full flex items-end relative top-12">
+            <div className="w-[40%] z-20 h-full flex items-end relative top-12">
               <div className="w-full aspect-square max-h-[30vh] border border-primary/30 rounded-lg overflow-hidden relative bg-black/20 backdrop-blur-sm">
                 <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-primary/60 z-10" />
                 <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-primary/60 z-10" />
@@ -164,15 +180,18 @@ const MissionLogs = () => {
             </div>
 
             {/* cpu stats (mobile) */}
-            <div className="flex flex-col items-end gap-2 w-[45%] z-20 h-full justify-between">
-              <div className="scale-[0.5] sm:scale-[0.6] origin-top-right w-[280px]">
+            <div className="flex flex-col items-end  w-[40%] z-20 h-full justify-between">
+              <div className="scale-[0.46] sm:scale-[0.6] origin-right mt-8 w-70">
                 <CpuStats />
               </div>
             </div>
           </div>
 
           {/* drill video (desktop) */}
-          <div className="hidden w-full h-48 lg:block lg:relative lg:w-full lg:h-64 xl:h-72 border border-primary/30 rounded-lg overflow-hidden backdrop-blur-sm pointer-events-auto z-20 bg-black">
+          <div className="hidden w-full h-48 lg:block lg:relative lg:w-full lg:h-76 xl:h-96 border border-primary/50 hover:border-primary rounded-lg overflow-hidden backdrop-blur-sm pointer-events-auto z-20 bg-black group">
+            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-primary/60 z-10 group-hover:top-4 group-hover:left-4 group-hover:border-primary transition-all ease-in-out duration-300" />
+            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-primary/60 z-10 group-hover:right-4 group-hover:bottom-4 group-hover:border-primary transition-all ease-in-out duration-300" />
+
             <video
               src={assets.missionLogs.drill}
               autoPlay
@@ -208,7 +227,7 @@ const MissionLogs = () => {
       </div>
 
       {/* register ring (mobile) */}
-      <div className="absolute bottom-[30px] right-3 z-[60] w-[140px] h-[140px] lg:hidden pointer-events-auto">
+      <div className="absolute bottom-6 right-6 z-60 w-30 h-30 lg:hidden pointer-events-auto">
         <RegisterRing />
       </div>
     </main>

@@ -1,12 +1,12 @@
 import { memo } from "react";
-import { FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { PiGlobeSimple } from "react-icons/pi";
 import type { IconType } from "react-icons";
 import { links } from "@/lib/links";
 import { assets } from "@/lib/assets";
 
 const socialLinks: { Icon: IconType; url: string; label: string }[] = [
-  { Icon: FaTwitter, url: links.social.twitter, label: "Twitter" },
+  { Icon: FaGithub, url: links.social.github, label: "Github" },
   { Icon: PiGlobeSimple, url: links.social.website, label: "Website" },
   { Icon: FaLinkedin, url: links.social.linkedin, label: "LinkedIn" },
   { Icon: FaInstagram, url: links.social.instagram, label: "Instagram" },

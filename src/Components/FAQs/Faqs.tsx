@@ -323,13 +323,13 @@ const Faqs = () => {
       </div>
 
       {/* desktop right panel */}
-      <div className="hidden lg:flex relative right-0 w-[40%] h-full flex-col items-center justify-center px-6 lg:p-4 z-20 pointer-events-none">
-        <FaqTitle className="text-[7rem] font-sans font-bold whitespace-nowrap tracking-tight leading-none drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] z-20 lg:mb-4 lg:ml-20" />
-        <div className="pointer-events-none select-none w-[600px] h-[600px] opacity-90 lg:mt-[-50px]">
+      <div className="hidden lg:flex relative text-center w-[40%] h-full flex-col items-center justify-center px-6 lg:p-4 z-20 pointer-events-none">
+        <FaqTitle className="text-[7rem] font-sans font-bold whitespace-nowrap tracking-tight leading-none drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] z-20"  />
+        <div className="pointer-events-none select-noneopacity-90 w-140 overflow-hidden">
           <OptimizedImage
             src={assets.faqs.gif}
             alt="FAQ Animate"
-            className="w-full h-full object-contain"
+            className=" w-180 scale-140"
           />
         </div>
       </div>
