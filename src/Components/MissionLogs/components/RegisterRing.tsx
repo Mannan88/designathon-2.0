@@ -14,7 +14,7 @@ const RegisterRing = () => {
       <div className="absolute inset-0 rounded-full border-[4px] border-white/70" />
       <div className="absolute inset-[4px] rounded-full bg-white" />
       <div className="absolute inset-[28px] rounded-full border-[2px] border-white/30" />
-      <div className="absolute inset-[30px] rounded-full bg-[#141414]" />
+      <div className="absolute inset-[20px] md:inset-[30px] rounded-full bg-[#141414]" />
 
       <motion.div
         className="absolute inset-0 w-full h-full will-change-transform"

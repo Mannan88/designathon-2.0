@@ -29,7 +29,7 @@ const guidelineContent = [
     lines: [
       "EACH TEAM MUST CONSIST OF:",
       "MINIMUM — 2 members",
-      "MAXIMUM — 3 members",
+      "MAXIMUM — 4 members",
     ],
   },
   {

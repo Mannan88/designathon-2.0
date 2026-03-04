@@ -1,4 +1,4 @@
-import { Globe, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Globe, Linkedin, Instagram, Github } from "lucide-react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { assets } from "@/lib/assets";
 import { links } from "@/lib/links";
@@ -9,21 +9,21 @@ const SOCIAL_PLACEHOLDER =
 const socialItems = [
   {
     id: 1,
-    name: "Twitter",
-    designation: "Follow Updates",
-    image: SOCIAL_PLACEHOLDER,
+    name: "Github",
+    designation: "For Tech Updates",
+    image: assets.hero.githubLogo,
     icon: (
-      <Twitter
+      <Github
         size={24}
         className="text-neutral-400 group-hover:text-accent transition-colors duration-300"
       />
     ),
-    href: links.social.twitter,
+    href: links.social.github,
   },
   {
     id: 2,
     name: "Website",
-    designation: "Visit GDG",
+    designation: "Visit GDG Website",
     image: assets.hero.gdgLogo,
     icon: (
       <Globe
@@ -37,7 +37,7 @@ const socialItems = [
     id: 3,
     name: "LinkedIn",
     designation: "Connect with us",
-    image: SOCIAL_PLACEHOLDER,
+    image: assets.hero.linkedInLogo,
     icon: (
       <Linkedin
         size={24}
@@ -49,8 +49,8 @@ const socialItems = [
   {
     id: 4,
     name: "Instagram",
-    designation: "See our gallery",
-    image: SOCIAL_PLACEHOLDER,
+    designation: "See our gallery!!",
+    image: assets.hero.instaLogo,
     icon: (
       <Instagram
         size={24}

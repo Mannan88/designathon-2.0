@@ -47,7 +47,7 @@ const HeroSection = () => {
         {/* gdgc logo */}
         <GdgIcon />
 
-        <div className="absolute md:-top-2.5 -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+        {/* <div className="absolute md:-top-2.5 -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
           <img
             src={assets.hero.gdgLogo}
             alt="GDG Logo"
@@ -55,7 +55,7 @@ const HeroSection = () => {
             decoding="async"
             draggable={false}
           />
-        </div>
+        </div> */}
 
         <NavigationMenu />
 

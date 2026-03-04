@@ -51,6 +51,7 @@ export const AnimatedTooltip = ({
           {item.href ? (
             <a
               href={item.href}
+              target="_blank"
               className="cursor-pointer block"
               onMouseMove={handleMouseMove}
             >

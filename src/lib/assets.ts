@@ -5,6 +5,9 @@ const vid = (id: string) => `${cdnBase}/video/upload/${id}`;
 
 export const assets = {
   hero: {
+    linkedInLogo:"https://res.cloudinary.com/denqhi2cg/image/upload/v1772583564/LinkedIn_avilck.png",
+    githubLogo:"https://res.cloudinary.com/denqhi2cg/image/upload/v1772583564/github_cjqj3b.webp",
+    instaLogo:"https://res.cloudinary.com/denqhi2cg/image/upload/v1772583564/instagram_fe0fou.webp",
     gdgLogo: img("v1769463249/gdg-logo_lwjmhh.png"),
     astronaut: img("v1771742929/astronaut_mr0lus.png"),
     bolt: img("v1771742981/bolt_a7pf3k.png", "f_auto,q_auto,w_400"),
@@ -48,11 +51,12 @@ export const assets = {
   },
   about: {
     carousel: [
-      img("v1772131687/img1_ouenae.jpg", "w_600,f_auto,q_auto"),
-      img("v1772131687/img2_riugpx.jpg", "w_600,f_auto,q_auto"),
-      img("v1772131687/img3_kunjn4.jpg", "w_600,f_auto,q_auto"),
-      img("v1772131687/img4_lc8rex.jpg", "w_600,f_auto,q_auto"),
-      img("v1772131687/img5_ops3de.jpg", "w_600,f_auto,q_auto"),
+      "https://res.cloudinary.com/denqhi2cg/image/upload/v1772616581/IMG_3374_1_1_soel08.png",
+      "https://res.cloudinary.com/denqhi2cg/image/upload/v1772616521/WhatsApp_Image_2026-03-04_at_14.55.14_hh3aqf.jpg",
+      "https://res.cloudinary.com/denqhi2cg/image/upload/v1772616520/WhatsApp_Image_2026-03-04_at_14.56.40_e1qw3f.jpg",
+      "https://res.cloudinary.com/denqhi2cg/image/upload/v1772616520/IMG20250207182222_1_nsdvgq.png",
+      "https://res.cloudinary.com/denqhi2cg/image/upload/v1772616521/WhatsApp_Image_2026-03-04_at_14.52.36_hadcin.jpg",
+      "https://res.cloudinary.com/denqhi2cg/image/upload/v1772616520/IMG_3506_1_1_wlevyc.png",
     ],
   },
   footer: {

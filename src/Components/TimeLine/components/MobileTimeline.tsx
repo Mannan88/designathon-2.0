@@ -196,6 +196,7 @@ const MobileTimelineCard = ({
   return (
     <div ref={cardRef} className="relative flex w-full min-h-[420px]">
       {/* left rail*/}
+    
       <div className="relative flex flex-col items-center w-12 sm:w-16 shrink-0">
         <div
           ref={lineSegmentRef}
@@ -207,10 +208,10 @@ const MobileTimelineCard = ({
         />
 
         {/* orange squares */}
-        <div className="relative z-10 flex flex-col items-center gap-1.5 mt-6">
+        {/* <div className="relative z-10 flex flex-col items-center gap-1.5 mt-6">
           <OrangeRect fill="#F27C06" ref={orangeRef1} className="h-3 w-3" />
           <OrangeRect fill="#F27C06" ref={orangeRef2} className="h-4 w-4" />
-        </div>
+        </div> */}
 
         {/* glowing dot*/}
         <div
@@ -256,20 +257,20 @@ const MobileTimelineCard = ({
             alt={event.title}
             loading="lazy"
             decoding="async"
-            className="mob-tl-galaxy absolute inset-0 w-full h-full object-contain pointer-events-none opacity-60"
+            className="mob-tl-galaxy absolute inset-0 w-full h-full object-contain pointer-events-none opacity-80 rounded-full"
           />
 
           {/* stats overlays */}
           <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
-            <p className="mob-tl-stats text-[7px] sm:text-[8px] text-white/50 font-mono">
+            <p className="mob-tl-stats text-[7px] sm:text-[8px] text-white font-mono">
               Redshift: z = 0.103
             </p>
-            <p className="mob-tl-stats text-[7px] sm:text-[8px] text-white/50 font-mono">
+            <p className="mob-tl-stats text-[7px] sm:text-[8px] text-white font-mono">
               Magnitude: u:18.65 g:17.86 r:17.51
             </p>
           </div>
           <div className="absolute bottom-2 left-2">
-            <p className="mob-tl-stats text-[7px] sm:text-[8px] text-white/50 font-mono">
+            <p className="mob-tl-stats text-[7px] sm:text-[8px] text-white font-mono">
               Luminosity: 2.6 × 10¹⁰ L☉
             </p>
           </div>

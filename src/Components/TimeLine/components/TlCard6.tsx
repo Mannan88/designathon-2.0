@@ -74,7 +74,7 @@ const TlCard6 = forwardRef<TlCardHandle>((_props, ref) => {
             alt=""
             loading="lazy"
             decoding="async"
-            className="w-50 col-span-1"
+            className="w-50 col-span-1 ml-10"
           />
         </div>
 

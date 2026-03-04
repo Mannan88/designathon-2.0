@@ -26,7 +26,7 @@ const RightColumn = () => {
             </p>
             <p>EACH TEAM MUST CONSIST OF:</p>
             <p>MINIMUM — 2 members</p>
-            <p>MAXIMUM — 3 members</p>
+            <p>MAXIMUM — 4 members</p>
           </div>
         </div>
       </div>
